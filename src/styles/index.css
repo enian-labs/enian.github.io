@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+   :root {
+      --radius: 0.5rem;
+   }
+   html,
+   body {
+      @apply flex h-full min-h-dvh flex-col bg-white font-mikado;
+   }
+}
+
+@layer components {
+   #app {
+      @apply flex flex-1 flex-col;
+   }
+   .w-limit {
+      @apply mx-auto w-full max-w-screen-xs;
+   }
+
+   /* bg in dashboard */
+   .bg-main {
+      @apply h-full bg-[url('/assets/bg-main.svg')] bg-cover bg-bottom bg-no-repeat p-2.5 pb-0;
+   }
+
+   /* bg in navigation */
+   .bg-navigation {
+      @apply w-limit flex h-[4.75rem] max-w-screen-xs items-center justify-between gap-3 rounded-full border-[0.5px] border-[#8726B7] bg-[radial-gradient(151.92%_127.02%_at_15.32%_21.04%,rgba(165,239,255,0.20)_0%,rgba(110,191,244,0.04)_77.08%,rgba(70,144,212,0.00)_100%)] p-2 shadow-2xl backdrop-blur-[6px];
+   }
+
+   /* button 3d */
+   .pushable {
+      @apply w-full rounded-full border-none p-0 outline-offset-4;
+      &:active .front {
+         @apply -translate-y-0.5;
+      }
+   }
+   .front {
+      @apply block -translate-y-1.5 rounded-full p-3 py-4 text-xl font-bold text-white;
+   }
+}
+
+/* for button start farming */
+.bg-pushable-gradient {
+   background: #b17700;
+   box-shadow:
+      0px 4.159px 8.318px 0px rgba(0, 0, 0, 0.14),
+      0px 8.318px 10.398px 0px rgba(0, 0, 0, 0.12),
+      0px 2.08px 20.796px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg-pushable-process-gradient {
+   background: #7c7c7c;
+   box-shadow:
+      0px 4.159px 8.318px 0px rgba(0, 0, 0, 0.14),
+      0px 8.318px 10.398px 0px rgba(0, 0, 0, 0.12),
+      0px 2.08px 20.796px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg-front-process-gradient {
+   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%),
+      #949494;
+   background-blend-mode: overlay, normal;
+   box-shadow:
+      0px 4.159px 8.318px 0px rgba(0, 0, 0, 0.14),
+      0px 8.318px 10.398px 0px rgba(0, 0, 0, 0.12),
+      0px 2.08px 20.796px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bg-front-gradient {
+   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%),
+      #c77126;
+   background-blend-mode: overlay, normal;
+   box-shadow:
+      0px 4.159px 8.318px 0px rgba(0, 0, 0, 0.14),
+      0px 8.318px 10.398px 0px rgba(0, 0, 0, 0.12),
+      0px 2.08px 20.796px 0px rgba(0, 0, 0, 0.2);
+   text-shadow:
+      2.08px 0px 6.239px rgba(0, 0, 0, 0.35),
+      0px 2.08px 4.159px rgba(0, 0, 0, 0.24),
+      0px 2.08px 2.08px rgba(0, 0, 0, 0.22),
+      0px 2.08px 4.159px rgba(0, 0, 0, 0.2);
+}
+
+.bg-front-gradient-white {
+   border-radius: 361.283px;
+   opacity: 0.7;
+   background: radial-gradient(
+      50% 50% at 50% 50%,
+      #fff 0%,
+      rgba(255, 255, 255, 0) 100%
+   );
+   mix-blend-mode: overlay;
+}
+
+.border-front-gradient {
+   opacity: 0.5;
+   background: linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 0.56%,
+      #fff 49.61%,
+      rgba(255, 255, 255, 0) 100.25%
+   );
+
+   mix-blend-mode: overlay;
+}
