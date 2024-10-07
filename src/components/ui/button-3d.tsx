@@ -28,7 +28,7 @@ export function Button3D({
          <div className="front bg-front-gradient relative overflow-hidden uppercase">
             {disabled && (
                <div
-                  className="bg-front-process-gradient absolute right-0 top-0 h-full"
+                  className="bg-front-process-gradient absolute right-0 top-0 h-full transition-all duration-1000"
                   style={{ width: `${percentage}%` }}
                ></div>
             )}

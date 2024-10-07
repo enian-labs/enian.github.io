@@ -20,6 +20,7 @@ function Dashboard() {
    const [processPercentage, setProcessPercentage] = React.useState(0);
 
    const textBtn = textRender;
+   const prcntg = processPercentage;
 
    const handleProcess = async () => {
       switch (process) {
@@ -102,7 +103,7 @@ function Dashboard() {
                   'bg-pushable-process-gradient relative':
                      process === 'PROCESS',
                })}
-               percentage={(100 - processPercentage).toString()}
+               percentage={(100 - prcntg).toString()}
             >
                {process === 'PROCESS' ? (
                   <Countdown
