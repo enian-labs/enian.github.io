@@ -6,7 +6,8 @@ import ResourceCard from '@/components/pages/gameplay/ResourceCard';
 import ProfilBadge from '@/components/pages/gameplay/ProfilBadge';
 import { Button3D } from '@/components/ui/button-3d';
 import Countdown from '@/lib/Countdown';
-import { cn } from '@/lib/utils';
+import { cn, sleep } from '@/lib/utils';
+import party from 'party-js';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -23,13 +24,31 @@ function Dashboard() {
    const prcntg = processPercentage;
 
    const handleProcess = async () => {
+      const bubbles: NodeListOf<HTMLElement> =
+         document.querySelectorAll('.bubble');
+
       switch (process) {
          case 'PROCESS':
+            bubbles.forEach((bubble) => {
+               // Remove the bubble after the confetti
+               bubble.style.opacity = '100'; // Fade out animation
+            });
+            await sleep(500);
             setProcess('END');
             setTextRender('Claim Resource');
             break;
 
          case 'END':
+            bubbles.forEach((bubble) => {
+               party.sparkles(bubble, {
+                  count: party.variation.range(1, 30), // Customize the amount of confetti
+                  size: party.variation.range(0.2, 0.65),
+               });
+
+               // Remove the bubble after the confetti
+               bubble.style.opacity = '0'; // Fade out animation
+            });
+            await sleep(500);
             setProcess('START');
             setTextRender('Start Farming');
             break;
@@ -62,38 +81,59 @@ function Dashboard() {
                   </div>
                </div>
 
-               {process === 'END' && (
-                  <>
-                     {/* RESOURCE RESULT AFTER FARMING */}
-                     <div className="absolute bottom-[35%] left-[10%] animate-bouncing">
-                        <Image
-                           src="/assets/resource/wood-result.svg"
-                           alt="resource"
-                           width={100}
-                           height={100}
-                           className="aspect-square"
-                        />
-                     </div>
-                     <div className="absolute bottom-[20%] right-[23%] animate-bouncing [animation-delay:2s]">
-                        <Image
-                           src="/assets/resource/wood-result.svg"
-                           alt="resource"
-                           width={100}
-                           height={100}
-                           className="aspect-square"
-                        />
-                     </div>
-                     <div className="absolute bottom-[48%] right-[3%] animate-bouncing [animation-delay:1s]">
-                        <Image
-                           src="/assets/resource/wood-result.svg"
-                           alt="resource"
-                           width={100}
-                           height={100}
-                           className="aspect-square"
-                        />
-                     </div>
-                  </>
-               )}
+               {/* {process === 'END' && ( */}
+               <>
+                  {/* RESOURCE RESULT AFTER FARMING */}
+                  <div
+                     className={cn(
+                        'bubble absolute bottom-[35%] left-[10%] animate-bouncing opacity-0 transition-opacity',
+                        {
+                           'opacity-100': process === 'END',
+                        }
+                     )}
+                  >
+                     <Image
+                        src="/assets/resource/wood-result.svg"
+                        alt="resource"
+                        width={100}
+                        height={100}
+                        className="aspect-square"
+                     />
+                  </div>
+                  <div
+                     className={cn(
+                        'bubble absolute bottom-[20%] right-[23%] animate-bouncing opacity-0 transition-opacity [animation-delay:2s]',
+                        {
+                           'opacity-100': process === 'END',
+                        }
+                     )}
+                  >
+                     <Image
+                        src="/assets/resource/wood-result.svg"
+                        alt="resource"
+                        width={100}
+                        height={100}
+                        className="aspect-square"
+                     />
+                  </div>
+                  <div
+                     className={cn(
+                        'bubble absolute bottom-[48%] right-[3%] animate-bouncing opacity-0 transition-opacity [animation-delay:1s]',
+                        {
+                           'opacity-100': process === 'END',
+                        }
+                     )}
+                  >
+                     <Image
+                        src="/assets/resource/wood-result.svg"
+                        alt="resource"
+                        width={100}
+                        height={100}
+                        className="aspect-square"
+                     />
+                  </div>
+               </>
+               {/* )} */}
             </div>
             {/* START FARMING */}
             <Button3D
