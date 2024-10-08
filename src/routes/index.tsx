@@ -109,7 +109,7 @@ function Dashboard() {
                      )}
                   >
                      <Image
-                        src="/assets/resource/wood-result.svg"
+                        src="/assets/resource/iron-result.svg"
                         alt="resource"
                         width={100}
                         height={100}
@@ -125,7 +125,7 @@ function Dashboard() {
                      )}
                   >
                      <Image
-                        src="/assets/resource/wood-result.svg"
+                        src="/assets/resource/leather-result.svg"
                         alt="resource"
                         width={100}
                         height={100}
