@@ -24,6 +24,10 @@
       @apply h-full bg-[url('/assets/bg-main.svg')] bg-cover bg-bottom bg-no-repeat p-2.5 pb-0;
    }
 
+   .bg-splash {
+      @apply h-full bg-[url('/assets/splash-screen.svg')] bg-cover bg-center bg-no-repeat;
+   }
+
    /* bg in navigation */
    .bg-navigation {
       @apply w-limit flex h-[4.75rem] max-w-screen-xs items-center justify-between gap-3 rounded-full border-[0.5px] border-[#8726B7] bg-[radial-gradient(151.92%_127.02%_at_15.32%_21.04%,rgba(165,239,255,0.20)_0%,rgba(110,191,244,0.04)_77.08%,rgba(70,144,212,0.00)_100%)] p-2 shadow-2xl backdrop-blur-[6px];
@@ -38,6 +42,18 @@
    }
    .front {
       @apply block -translate-y-1.5 rounded-full p-3 py-4 text-xl font-bold text-white;
+   }
+
+   .age-big {
+      @apply text-[2rem]/normal tracking-[0.64px];
+   }
+
+   .age-result-card {
+      @apply flex w-full flex-col items-center justify-center rounded-xl bg-black/40 p-4 text-center font-bold text-white backdrop-blur-[6px];
+   }
+
+   .age-result-title {
+      @apply text-shadow-age-title text-lg tracking-[0.4px];
    }
 }
 
@@ -104,4 +120,15 @@
    );
 
    mix-blend-mode: overlay;
+}
+
+.text-shadow-age-title {
+   text-shadow:
+      2.08px 0px 6.239px rgba(0, 0, 0, 0.35),
+      0px 2.08px 4.159px rgba(0, 0, 0, 0.24),
+      0px 2.08px 2.08px rgba(0, 0, 0, 0.22);
+}
+
+.text-shadow-age-result {
+   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

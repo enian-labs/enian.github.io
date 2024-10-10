@@ -8,6 +8,7 @@ import { Button3D } from '@/components/ui/button-3d';
 import Countdown from '@/lib/Countdown';
 import { cn, sleep } from '@/lib/utils';
 import party from 'party-js';
+import MainLayout from '@/components/layouts/MainLayout';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -61,7 +62,7 @@ function Dashboard() {
    };
 
    return (
-      <>
+      <MainLayout>
          <ProfilBadge />
          <div className="flex flex-1 flex-col items-center justify-end">
             <div className="relative mb-4 w-full ty:mb-[1.375rem]">
@@ -81,7 +82,6 @@ function Dashboard() {
                   </div>
                </div>
 
-               {/* {process === 'END' && ( */}
                <>
                   {/* RESOURCE RESULT AFTER FARMING */}
                   <div
@@ -133,7 +133,6 @@ function Dashboard() {
                      />
                   </div>
                </>
-               {/* )} */}
             </div>
             {/* START FARMING */}
             <Button3D
@@ -160,6 +159,6 @@ function Dashboard() {
                )}
             </Button3D>
          </div>
-      </>
+      </MainLayout>
    );
 }

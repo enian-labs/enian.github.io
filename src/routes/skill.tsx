@@ -1,13 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import MainLayout from '@/components/layouts/MainLayout';
+import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute("/skill")({
-  component: Skill,
+export const Route = createFileRoute('/skill')({
+   component: Skill,
 });
 
 function Skill() {
-  return (
-    <div className="p-2">
-      <h3 className="text-purple-500">Skill | Enian Combat!</h3>
-    </div>
-  );
+   return (
+      <MainLayout>
+         <div className="p-2">
+            <h3 className="text-purple-500">Skill | Enian Combat!</h3>
+         </div>
+      </MainLayout>
+   );
 }

@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SkillImport } from './routes/skill'
+import { Route as OnboardingImport } from './routes/onboarding'
 import { Route as MissionImport } from './routes/mission'
 import { Route as MarketImport } from './routes/market'
 import { Route as InventoryImport } from './routes/inventory'
@@ -21,6 +22,11 @@ import { Route as IndexImport } from './routes/index'
 
 const SkillRoute = SkillImport.update({
   path: '/skill',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OnboardingRoute = OnboardingImport.update({
+  path: '/onboarding',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -76,6 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MissionImport
       parentRoute: typeof rootRoute
     }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingImport
+      parentRoute: typeof rootRoute
+    }
     '/skill': {
       id: '/skill'
       path: '/skill'
@@ -93,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof InventoryRoute
   '/market': typeof MarketRoute
   '/mission': typeof MissionRoute
+  '/onboarding': typeof OnboardingRoute
   '/skill': typeof SkillRoute
 }
 
@@ -101,6 +115,7 @@ export interface FileRoutesByTo {
   '/inventory': typeof InventoryRoute
   '/market': typeof MarketRoute
   '/mission': typeof MissionRoute
+  '/onboarding': typeof OnboardingRoute
   '/skill': typeof SkillRoute
 }
 
@@ -110,15 +125,29 @@ export interface FileRoutesById {
   '/inventory': typeof InventoryRoute
   '/market': typeof MarketRoute
   '/mission': typeof MissionRoute
+  '/onboarding': typeof OnboardingRoute
   '/skill': typeof SkillRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/inventory' | '/market' | '/mission' | '/skill'
+  fullPaths:
+    | '/'
+    | '/inventory'
+    | '/market'
+    | '/mission'
+    | '/onboarding'
+    | '/skill'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inventory' | '/market' | '/mission' | '/skill'
-  id: '__root__' | '/' | '/inventory' | '/market' | '/mission' | '/skill'
+  to: '/' | '/inventory' | '/market' | '/mission' | '/onboarding' | '/skill'
+  id:
+    | '__root__'
+    | '/'
+    | '/inventory'
+    | '/market'
+    | '/mission'
+    | '/onboarding'
+    | '/skill'
   fileRoutesById: FileRoutesById
 }
 
@@ -127,6 +156,7 @@ export interface RootRouteChildren {
   InventoryRoute: typeof InventoryRoute
   MarketRoute: typeof MarketRoute
   MissionRoute: typeof MissionRoute
+  OnboardingRoute: typeof OnboardingRoute
   SkillRoute: typeof SkillRoute
 }
 
@@ -135,6 +165,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryRoute: InventoryRoute,
   MarketRoute: MarketRoute,
   MissionRoute: MissionRoute,
+  OnboardingRoute: OnboardingRoute,
   SkillRoute: SkillRoute,
 }
 
@@ -154,6 +185,7 @@ export const routeTree = rootRoute
         "/inventory",
         "/market",
         "/mission",
+        "/onboarding",
         "/skill"
       ]
     },
@@ -168,6 +200,9 @@ export const routeTree = rootRoute
     },
     "/mission": {
       "filePath": "mission.tsx"
+    },
+    "/onboarding": {
+      "filePath": "onboarding.tsx"
     },
     "/skill": {
       "filePath": "skill.tsx"
