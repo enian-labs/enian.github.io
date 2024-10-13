@@ -1,9 +1,10 @@
+import QuestCard from '@/components/pages/quest/QuestCard';
 import { Button3D } from '@/components/ui/button-3d';
 import { ONBOARDING_RESOURCES } from '@/constant/core';
 import AnimatedCounter from '@/lib/Counter';
 import Image from '@/lib/Image';
 import { letterFormatMoney, sleep } from '@/lib/utils';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import React from 'react';
 
 export const Route = createFileRoute('/onboarding')({
@@ -11,6 +12,9 @@ export const Route = createFileRoute('/onboarding')({
 });
 
 function Onboarding() {
+   const router = useNavigate({
+      from: '/onboarding',
+   });
    const [loadingWidth, setLoadingWidth] = React.useState(0);
    const [initProcess, setInitProcess] = React.useState<
       'init' | 'result' | 'mission'
@@ -31,9 +35,9 @@ function Onboarding() {
       <div className="flex flex-1 flex-col">
          <main className="flex-1 overflow-y-auto">
             <section className="w-limit bg-splash relative flex flex-1 flex-col gap-4 ty:gap-5">
-               <div className="flex flex-1 flex-col items-center justify-end px-5 py-9">
+               <div className="flex flex-1 flex-col items-center justify-end">
                   {runInitProcess === 'init' && (
-                     <>
+                     <div className="flex flex-col items-center px-5 pb-9">
                         <div className="relative mb-3 w-full">
                            <Image
                               src="/assets/wood-container.svg"
@@ -61,11 +65,11 @@ function Onboarding() {
                            />
                            %)
                         </p>
-                     </>
+                     </div>
                   )}
 
                   {runInitProcess === 'result' && (
-                     <>
+                     <div className="flex w-full flex-col items-center px-5 pb-9">
                         <div className="age-result-card mb-3">
                            <span className="age-result-title">
                               Your Telegram Age
@@ -110,9 +114,48 @@ function Onboarding() {
                         >
                            Continue
                         </Button3D>
-                     </>
+                     </div>
                   )}
-                  {runInitProcess === 'mission' && <>mission onetime</>}
+                  {runInitProcess === 'mission' && (
+                     <div className="age-result-card w-full rounded-3xl rounded-b-none border border-black/0 bg-black/30 pb-9 pt-8">
+                        <div className="mb-7">
+                           <span className="age-result-title">
+                              ONE TIME QUEST
+                           </span>
+                           <p className="max-w-sm text-center text-[1.188rem]/normal font-normal">
+                              Complete the quests below to continue playing this
+                              game
+                           </p>
+                        </div>
+                        <div className="mb-6 grid w-full gap-3">
+                           <QuestCard
+                              questType="claim"
+                              metadata={{
+                                 title: 'Follow Enian Telegram',
+                                 reward: '20.000',
+                                 type: 'telegram',
+                              }}
+                           />
+                           <QuestCard
+                              metadata={{
+                                 title: 'Follow Enian X',
+                                 reward: '20.000',
+                                 type: 'x',
+                              }}
+                           />
+                        </div>
+                        <Button3D
+                           btnClassName="mt-6"
+                           onClick={() => {
+                              router({
+                                 to: '/',
+                              });
+                           }}
+                        >
+                           Continue
+                        </Button3D>
+                     </div>
+                  )}
                </div>
             </section>
          </main>
