@@ -129,7 +129,7 @@ function Onboarding() {
                         </div>
                         <div className="mb-6 grid w-full gap-3">
                            <QuestCard
-                              questType="claim"
+                              questType="claimed"
                               metadata={{
                                  title: 'Follow Enian Telegram',
                                  reward: '20.000',

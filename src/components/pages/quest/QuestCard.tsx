@@ -8,11 +8,11 @@ type QuestCardProps = {
    onClick?: () => void;
    className?: string;
    btnClassName?: string;
-   questType?: 'start' | 'verify' | 'claim';
+   questType?: 'start' | 'verify' | 'claim' | 'claimed';
    metadata: {
       title: string;
       reward: string;
-      type: 'telegram' | 'x' | 'url';
+      type: 'telegram' | 'x' | 'url' | 'other';
    };
 };
 
@@ -32,18 +32,26 @@ export default function QuestCard({
       >
          <div className="flex items-center space-x-4">
             <div className="size-[3.125rem] min-w-[3.125rem]">
-               <Image
-                  alt="mission"
-                  src={
-                     metadata.type === 'x'
-                        ? '/assets/quest/icon-x.svg'
-                        : '/assets/quest/icon-telegram.svg'
-                  }
-                  className="size-[3.125rem]"
-               />
+               {metadata.type !== 'other' ? (
+                  <Image
+                     alt="mission"
+                     src={
+                        metadata.type === 'x'
+                           ? '/assets/quest/icon-x.svg'
+                           : '/assets/quest/icon-telegram.svg'
+                     }
+                     className="size-[3.125rem]"
+                  />
+               ) : (
+                  <Image
+                     alt="mission"
+                     src="/assets/quest/icon-other.svg"
+                     className="size-[3.125rem]"
+                  />
+               )}
             </div>
-            <div className="flex flex-col">
-               <h3 className="text-shadow-age-title text-lg font-bold text-white">
+            <div className="flex flex-col text-white">
+               <h3 className="text-shadow-age-title text-lg font-bold">
                   {metadata.title}
                </h3>
                <div className="flex items-center text-sm font-bold">
@@ -76,7 +84,7 @@ export default function QuestCard({
                </>
             )}
             {questType === 'verify' && 'VERIFY'}
-            {questType === 'claim' && (
+            {questType === 'claimed' && (
                <>
                   <CheckFat size={16} weight="fill" />
                </>
