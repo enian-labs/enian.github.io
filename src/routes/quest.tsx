@@ -14,7 +14,7 @@ function Quest() {
          navClassName="ty:pb-0"
       >
          <ProfilBadge />
-         <div className="flex flex-1 flex-col overflow-y-auto">
+         <div className="flex flex-1 flex-col overflow-y-scroll no-scrollbar">
             <h3 className="quest-title mb-3">DAILY QUEST</h3>
             <div className="grid w-full gap-3">
                <QuestCard

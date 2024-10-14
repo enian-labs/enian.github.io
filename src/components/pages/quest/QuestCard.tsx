@@ -26,7 +26,7 @@ export default function QuestCard({
    return (
       <div
          className={cn(
-            'shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80) inset] flex items-center justify-between gap-3 rounded-xl border border-[#8726B7] bg-black/10 p-4 backdrop-blur',
+            'shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80) inset] flex items-center justify-between gap-3 rounded-xl border border-gray-600 bg-black/10 p-4 backdrop-blur',
             className
          )}
       >
