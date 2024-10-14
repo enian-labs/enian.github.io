@@ -4,9 +4,18 @@ import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 import React from 'react';
 
-export default function Navigation() {
+type NavigationProps = {
+   className?: string;
+};
+
+export default function Navigation({ className }: NavigationProps) {
    return (
-      <footer className="ty:pb-[1.875rem] sticky bottom-0 left-0 w-full pb-4 pt-0">
+      <footer
+         className={cn(
+            'sticky bottom-0 left-0 w-full pb-4 pt-0 ty:pb-[1.875rem]',
+            className
+         )}
+      >
          <section className="bg-navigation">
             {NAVIGATION_LINKS.map((nav, key) => (
                <Link

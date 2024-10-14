@@ -19,8 +19,8 @@ export const NAVIGATION_LINKS: {
       img: '/assets/menu/play-the-game.svg',
    },
    {
-      name: 'Missions',
-      href: '/mission',
+      name: 'Quest',
+      href: '/quest',
       img: '/assets/menu/missions.svg',
    },
    {

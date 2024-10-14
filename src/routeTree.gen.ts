@@ -12,8 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SkillImport } from './routes/skill'
+import { Route as QuestImport } from './routes/quest'
 import { Route as OnboardingImport } from './routes/onboarding'
-import { Route as MissionImport } from './routes/mission'
 import { Route as MarketImport } from './routes/market'
 import { Route as InventoryImport } from './routes/inventory'
 import { Route as IndexImport } from './routes/index'
@@ -25,13 +25,13 @@ const SkillRoute = SkillImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const OnboardingRoute = OnboardingImport.update({
-  path: '/onboarding',
+const QuestRoute = QuestImport.update({
+  path: '/quest',
   getParentRoute: () => rootRoute,
 } as any)
 
-const MissionRoute = MissionImport.update({
-  path: '/mission',
+const OnboardingRoute = OnboardingImport.update({
+  path: '/onboarding',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -75,18 +75,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketImport
       parentRoute: typeof rootRoute
     }
-    '/mission': {
-      id: '/mission'
-      path: '/mission'
-      fullPath: '/mission'
-      preLoaderRoute: typeof MissionImport
-      parentRoute: typeof rootRoute
-    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingImport
+      parentRoute: typeof rootRoute
+    }
+    '/quest': {
+      id: '/quest'
+      path: '/quest'
+      fullPath: '/quest'
+      preLoaderRoute: typeof QuestImport
       parentRoute: typeof rootRoute
     }
     '/skill': {
@@ -105,8 +105,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/inventory': typeof InventoryRoute
   '/market': typeof MarketRoute
-  '/mission': typeof MissionRoute
   '/onboarding': typeof OnboardingRoute
+  '/quest': typeof QuestRoute
   '/skill': typeof SkillRoute
 }
 
@@ -114,8 +114,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/inventory': typeof InventoryRoute
   '/market': typeof MarketRoute
-  '/mission': typeof MissionRoute
   '/onboarding': typeof OnboardingRoute
+  '/quest': typeof QuestRoute
   '/skill': typeof SkillRoute
 }
 
@@ -124,8 +124,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/inventory': typeof InventoryRoute
   '/market': typeof MarketRoute
-  '/mission': typeof MissionRoute
   '/onboarding': typeof OnboardingRoute
+  '/quest': typeof QuestRoute
   '/skill': typeof SkillRoute
 }
 
@@ -135,18 +135,18 @@ export interface FileRouteTypes {
     | '/'
     | '/inventory'
     | '/market'
-    | '/mission'
     | '/onboarding'
+    | '/quest'
     | '/skill'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inventory' | '/market' | '/mission' | '/onboarding' | '/skill'
+  to: '/' | '/inventory' | '/market' | '/onboarding' | '/quest' | '/skill'
   id:
     | '__root__'
     | '/'
     | '/inventory'
     | '/market'
-    | '/mission'
     | '/onboarding'
+    | '/quest'
     | '/skill'
   fileRoutesById: FileRoutesById
 }
@@ -155,8 +155,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InventoryRoute: typeof InventoryRoute
   MarketRoute: typeof MarketRoute
-  MissionRoute: typeof MissionRoute
   OnboardingRoute: typeof OnboardingRoute
+  QuestRoute: typeof QuestRoute
   SkillRoute: typeof SkillRoute
 }
 
@@ -164,8 +164,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InventoryRoute: InventoryRoute,
   MarketRoute: MarketRoute,
-  MissionRoute: MissionRoute,
   OnboardingRoute: OnboardingRoute,
+  QuestRoute: QuestRoute,
   SkillRoute: SkillRoute,
 }
 
@@ -184,8 +184,8 @@ export const routeTree = rootRoute
         "/",
         "/inventory",
         "/market",
-        "/mission",
         "/onboarding",
+        "/quest",
         "/skill"
       ]
     },
@@ -198,11 +198,11 @@ export const routeTree = rootRoute
     "/market": {
       "filePath": "market.tsx"
     },
-    "/mission": {
-      "filePath": "mission.tsx"
-    },
     "/onboarding": {
       "filePath": "onboarding.tsx"
+    },
+    "/quest": {
+      "filePath": "quest.tsx"
     },
     "/skill": {
       "filePath": "skill.tsx"
