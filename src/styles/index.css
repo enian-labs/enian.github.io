@@ -67,7 +67,6 @@
 }
 
 @layer utilities {
-
    /* Hide scrollbar for Chrome, Safari and Opera */
    .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -79,6 +78,17 @@
       /* IE and Edge */
       scrollbar-width: none;
       /* Firefox */
+   }
+
+   .bg-modal-daily {
+      background: radial-gradient(
+            99.56% 104.78% at 15.32% 12.56%,
+            rgba(165, 239, 255, 0.2) 0%,
+            rgba(110, 191, 244, 0.04) 77.08%,
+            rgba(70, 144, 212, 0) 100%
+         ),
+         rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
    }
 }
 
@@ -127,18 +137,22 @@
 .bg-front-gradient-white {
    border-radius: 361.283px;
    opacity: 0.7;
-   background: radial-gradient(50% 50% at 50% 50%,
-         #fff 0%,
-         rgba(255, 255, 255, 0) 100%);
+   background: radial-gradient(
+      50% 50% at 50% 50%,
+      #fff 0%,
+      rgba(255, 255, 255, 0) 100%
+   );
    mix-blend-mode: overlay;
 }
 
 .border-front-gradient {
    opacity: 0.5;
-   background: linear-gradient(270deg,
-         rgba(255, 255, 255, 0) 0.56%,
-         #fff 49.61%,
-         rgba(255, 255, 255, 0) 100.25%);
+   background: linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 0.56%,
+      #fff 49.61%,
+      rgba(255, 255, 255, 0) 100.25%
+   );
 
    mix-blend-mode: overlay;
 }

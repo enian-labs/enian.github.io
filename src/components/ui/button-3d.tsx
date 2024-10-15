@@ -7,6 +7,7 @@ export type Button3DProps = {
    disabled?: boolean;
    btnClassName?: string;
    percentage?: string;
+   textClassName?: string;
 };
 
 export function Button3D({
@@ -15,6 +16,7 @@ export function Button3D({
    disabled,
    btnClassName,
    percentage,
+   textClassName,
 }: Button3DProps) {
    return (
       // outer shadow
@@ -25,7 +27,12 @@ export function Button3D({
          disabled={disabled}
       >
          {/* button fill */}
-         <div className="front bg-front-gradient relative overflow-hidden uppercase">
+         <div
+            className={cn(
+               'front bg-front-gradient relative overflow-hidden uppercase',
+               textClassName
+            )}
+         >
             {disabled && (
                <div
                   className="bg-front-process-gradient absolute right-0 top-0 h-full transition-all duration-1000"
