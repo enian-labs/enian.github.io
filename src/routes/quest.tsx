@@ -11,6 +11,9 @@ import {
    DialogTitle,
 } from '@/components/ui/dialog';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import DailyQuestCard from '@/components/pages/quest/DailyQuestCard';
+import { Button3D } from '@/components/ui/button-3d';
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute('/quest')({
    component: Quest,
@@ -75,7 +78,45 @@ function Quest() {
                      </DialogDescription>
                   </DialogHeader>
                </VisuallyHidden.Root>
-               <div className="grid gap-4">halo dialog</div>
+               <div className="flex flex-wrap justify-center gap-1.5">
+                  {Array.from({ length: 7 }).map((_, key) => (
+                     <div key={key}>
+                        <DailyQuestCard
+                           metadata={{
+                              title: `Day ${key + 1}`,
+                              status: key === 0 ? 'claimed' : 'start',
+                              value: '5.000',
+                           }}
+                        />
+                     </div>
+                  ))}
+               </div>
+               <div className="mt-6 space-y-3">
+                  <Button3D
+                     onClick={() => {
+                        console.log('claimed');
+                     }}
+                     // for comeback tomorrow
+
+                     // btnClassName="bg-pushable-process-gradient relative"
+                     // disabled
+                     // percentage="100"
+                  >
+                     <span className="relative z-[5]">GET 5.000 GOLD</span>
+                  </Button3D>
+                  <Button
+                     size={'lg'}
+                     type="button"
+                     className="btn-ads"
+                     onClick={() => {
+                        console.log(
+                           'see ads first then claimed after end of ads'
+                        );
+                     }}
+                  >
+                     <span>WATCH ADS TO DOUBLE IT</span>
+                  </Button>
+               </div>
             </DialogContent>
          </Dialog>
       </>
