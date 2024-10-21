@@ -67,10 +67,10 @@ function Dashboard() {
          <div className="flex flex-1 flex-col items-center justify-end">
             <div className="relative mb-4 w-full ty:mb-[1.375rem]">
                <Image
-                  src="/assets/knight.svg"
+                  src="/assets/original/knight.svg"
                   alt="knight"
-                  width={275}
-                  height={533}
+                  width={328}
+                  height={323}
                   className="mx-auto w-4/6 ty:w-auto"
                />
                {/* RESOURCES LIST */}
@@ -93,7 +93,7 @@ function Dashboard() {
                      )}
                   >
                      <Image
-                        src="/assets/resource/wood-result.svg"
+                        src="/assets/original/resource/bubble-wood.svg"
                         alt="resource"
                         width={100}
                         height={100}
@@ -109,7 +109,7 @@ function Dashboard() {
                      )}
                   >
                      <Image
-                        src="/assets/resource/iron-result.svg"
+                        src="/assets/original/resource/bubble-wood.svg"
                         alt="resource"
                         width={100}
                         height={100}
@@ -125,7 +125,7 @@ function Dashboard() {
                      )}
                   >
                      <Image
-                        src="/assets/resource/leather-result.svg"
+                        src="/assets/original/resource/bubble-wood.svg"
                         alt="resource"
                         width={100}
                         height={100}

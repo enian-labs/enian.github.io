@@ -84,25 +84,25 @@ function Onboarding() {
                            <span className="age-result-title mb-6">
                               Free Starter Resource
                            </span>
-                           <div className="flex items-center justify-between gap-5">
+                           <div className="flex items-center justify-center">
                               {ONBOARDING_RESOURCES.map((resource) => (
                                  <div
                                     key={resource.name}
-                                    className="flex flex-col items-center justify-center gap-2"
+                                    className="flex items-start justify-center gap-3"
                                  >
                                     <Image
                                        src={resource.img}
                                        alt={resource.name}
-                                       width={60}
-                                       height={60}
+                                       width={56}
+                                       height={56}
                                     />
-                                    <div className="text-center font-bold text-white">
-                                       <div className="tracing-[0.36px] text-lg/none">
-                                          {letterFormatMoney(resource.total)}
-                                       </div>
+                                    <div className="text-left font-bold text-white">
                                        <span className="tracing-[0.24px] text-xs/none capitalize">
                                           {resource.name}
                                        </span>
+                                       <div className="tracing-[0.48px] mt-1 text-2xl/none">
+                                          {resource.total}
+                                       </div>
                                     </div>
                                  </div>
                               ))}
