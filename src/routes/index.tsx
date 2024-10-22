@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/dialog';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import SelectFarming from '@/components/pages/gameplay/SelectFarming';
+import FarmingBubble from '@/components/pages/gameplay/FarmingBubble';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -97,54 +98,30 @@ function Dashboard() {
 
                   <>
                      {/* RESOURCE RESULT AFTER FARMING */}
-                     <div
+                     <FarmingBubble
+                        type={farming}
+                        className={cn('bottom-[35%] left-[10%]', {
+                           'opacity-100': process === 'END',
+                        })}
+                     />
+                     <FarmingBubble
+                        type={farming}
                         className={cn(
-                           'bubble absolute bottom-[35%] left-[10%] animate-bouncing opacity-0 transition-opacity',
+                           'bottom-[20%] right-[23%] [animation-delay:2s]',
                            {
                               'opacity-100': process === 'END',
                            }
                         )}
-                     >
-                        <Image
-                           src="/assets/original/resource/bubble-wood.svg"
-                           alt="resource"
-                           width={100}
-                           height={100}
-                           className="aspect-square"
-                        />
-                     </div>
-                     <div
+                     />
+                     <FarmingBubble
+                        type={farming}
                         className={cn(
-                           'bubble absolute bottom-[20%] right-[23%] animate-bouncing opacity-0 transition-opacity [animation-delay:2s]',
+                           'bottom-[48%] right-[3%] [animation-delay:1s]',
                            {
                               'opacity-100': process === 'END',
                            }
                         )}
-                     >
-                        <Image
-                           src="/assets/original/resource/bubble-wood.svg"
-                           alt="resource"
-                           width={100}
-                           height={100}
-                           className="aspect-square"
-                        />
-                     </div>
-                     <div
-                        className={cn(
-                           'bubble absolute bottom-[48%] right-[3%] animate-bouncing opacity-0 transition-opacity [animation-delay:1s]',
-                           {
-                              'opacity-100': process === 'END',
-                           }
-                        )}
-                     >
-                        <Image
-                           src="/assets/original/resource/bubble-wood.svg"
-                           alt="resource"
-                           width={100}
-                           height={100}
-                           className="aspect-square"
-                        />
-                     </div>
+                     />
                   </>
                </div>
                {/* START FARMING */}
