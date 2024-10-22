@@ -75,3 +75,19 @@ export const ONBOARDING_RESOURCES: {
    //    total: 1300,
    // },
 ];
+
+export const FARMING_LIST: { name: string; img: string }[] = [
+   {
+      name: 'wood',
+      img: '/assets/original/resource/wood.svg',
+   },
+
+   {
+      name: 'iron',
+      img: '/assets/original/resource/iron.svg',
+   },
+   {
+      name: 'leather',
+      img: '/assets/original/resource/leather.svg',
+   },
+];

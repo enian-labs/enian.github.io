@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import Image from '@/lib/Image';
-import { RESOURCE_LIST } from '@/constant/core';
+import { FARMING_LIST, RESOURCE_LIST } from '@/constant/core';
 import ResourceCard from '@/components/pages/gameplay/ResourceCard';
 import ProfilBadge from '@/components/pages/gameplay/ProfilBadge';
 import { Button3D } from '@/components/ui/button-3d';
@@ -9,6 +9,15 @@ import Countdown from '@/lib/Countdown';
 import { cn, sleep } from '@/lib/utils';
 import party from 'party-js';
 import MainLayout from '@/components/layouts/MainLayout';
+import {
+   Dialog,
+   DialogContent,
+   DialogDescription,
+   DialogHeader,
+   DialogTitle,
+} from '@/components/ui/dialog';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import SelectFarming from '@/components/pages/gameplay/SelectFarming';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -20,6 +29,8 @@ function Dashboard() {
    );
    const [textRender, setTextRender] = React.useState('Start Farming');
    const [processPercentage, setProcessPercentage] = React.useState(0);
+   const [openFarming, setOpenFarming] = React.useState(false);
+   const [farming, setFarming] = React.useState('');
 
    const textBtn = textRender;
    const prcntg = processPercentage;
@@ -62,103 +73,145 @@ function Dashboard() {
    };
 
    return (
-      <MainLayout>
-         <ProfilBadge />
-         <div className="flex flex-1 flex-col items-center justify-end">
-            <div className="relative mb-4 w-full ty:mb-[1.375rem]">
-               <Image
-                  src="/assets/original/knight.svg"
-                  alt="knight"
-                  width={328}
-                  height={323}
-                  className="mx-auto w-4/6 ty:w-auto"
-               />
-               {/* RESOURCES LIST */}
-               <div className="absolute bottom-0 left-0 w-full">
-                  <div className="flex items-center justify-center gap-3">
-                     {RESOURCE_LIST.map((resource) => (
-                        <ResourceCard key={resource.name} item={resource} />
-                     ))}
-                  </div>
-               </div>
-
-               <>
-                  {/* RESOURCE RESULT AFTER FARMING */}
-                  <div
-                     className={cn(
-                        'bubble absolute bottom-[35%] left-[10%] animate-bouncing opacity-0 transition-opacity',
-                        {
-                           'opacity-100': process === 'END',
-                        }
-                     )}
-                  >
-                     <Image
-                        src="/assets/original/resource/bubble-wood.svg"
-                        alt="resource"
-                        width={100}
-                        height={100}
-                        className="aspect-square"
-                     />
-                  </div>
-                  <div
-                     className={cn(
-                        'bubble absolute bottom-[20%] right-[23%] animate-bouncing opacity-0 transition-opacity [animation-delay:2s]',
-                        {
-                           'opacity-100': process === 'END',
-                        }
-                     )}
-                  >
-                     <Image
-                        src="/assets/original/resource/bubble-wood.svg"
-                        alt="resource"
-                        width={100}
-                        height={100}
-                        className="aspect-square"
-                     />
-                  </div>
-                  <div
-                     className={cn(
-                        'bubble absolute bottom-[48%] right-[3%] animate-bouncing opacity-0 transition-opacity [animation-delay:1s]',
-                        {
-                           'opacity-100': process === 'END',
-                        }
-                     )}
-                  >
-                     <Image
-                        src="/assets/original/resource/bubble-wood.svg"
-                        alt="resource"
-                        width={100}
-                        height={100}
-                        className="aspect-square"
-                     />
-                  </div>
-               </>
-            </div>
-            {/* START FARMING */}
-            <Button3D
-               onClick={handleProcess}
-               disabled={process === 'PROCESS'}
-               btnClassName={cn({
-                  'bg-pushable-process-gradient relative':
-                     process === 'PROCESS',
-               })}
-               percentage={(100 - prcntg).toString()}
-            >
-               {process === 'PROCESS' ? (
-                  <Countdown
-                     hours={0}
-                     minutes={0}
-                     seconds={10}
-                     onCountdownFinished={() => handleProcess()}
-                     onPercentage={(percentage) => {
-                        setProcessPercentage(Number(percentage));
-                     }}
+      <>
+         <MainLayout>
+            <ProfilBadge />
+            <div className="flex flex-1 flex-col items-center justify-end">
+               <div className="relative mb-4 w-full ty:mb-[1.375rem]">
+                  <Image
+                     src="/assets/original/knight.svg"
+                     alt="knight"
+                     width={328}
+                     height={323}
+                     className="mx-auto w-4/6 ty:w-auto"
                   />
-               ) : (
-                  textBtn
-               )}
-            </Button3D>
-         </div>
-      </MainLayout>
+                  {/* RESOURCES LIST */}
+                  <div className="absolute bottom-0 left-0 w-full">
+                     <div className="flex items-center justify-center gap-3">
+                        {RESOURCE_LIST.map((resource) => (
+                           <ResourceCard key={resource.name} item={resource} />
+                        ))}
+                     </div>
+                  </div>
+
+                  <>
+                     {/* RESOURCE RESULT AFTER FARMING */}
+                     <div
+                        className={cn(
+                           'bubble absolute bottom-[35%] left-[10%] animate-bouncing opacity-0 transition-opacity',
+                           {
+                              'opacity-100': process === 'END',
+                           }
+                        )}
+                     >
+                        <Image
+                           src="/assets/original/resource/bubble-wood.svg"
+                           alt="resource"
+                           width={100}
+                           height={100}
+                           className="aspect-square"
+                        />
+                     </div>
+                     <div
+                        className={cn(
+                           'bubble absolute bottom-[20%] right-[23%] animate-bouncing opacity-0 transition-opacity [animation-delay:2s]',
+                           {
+                              'opacity-100': process === 'END',
+                           }
+                        )}
+                     >
+                        <Image
+                           src="/assets/original/resource/bubble-wood.svg"
+                           alt="resource"
+                           width={100}
+                           height={100}
+                           className="aspect-square"
+                        />
+                     </div>
+                     <div
+                        className={cn(
+                           'bubble absolute bottom-[48%] right-[3%] animate-bouncing opacity-0 transition-opacity [animation-delay:1s]',
+                           {
+                              'opacity-100': process === 'END',
+                           }
+                        )}
+                     >
+                        <Image
+                           src="/assets/original/resource/bubble-wood.svg"
+                           alt="resource"
+                           width={100}
+                           height={100}
+                           className="aspect-square"
+                        />
+                     </div>
+                  </>
+               </div>
+               {/* START FARMING */}
+               <Button3D
+                  onClick={() => {
+                     setOpenFarming(true);
+                  }}
+                  disabled={process === 'PROCESS'}
+                  btnClassName={cn({
+                     'bg-pushable-process-gradient relative':
+                        process === 'PROCESS',
+                  })}
+                  percentage={(100 - prcntg).toString()}
+               >
+                  {process === 'PROCESS' ? (
+                     <Countdown
+                        hours={0}
+                        minutes={0}
+                        seconds={10}
+                        onCountdownFinished={() => handleProcess()}
+                        onPercentage={(percentage) => {
+                           setProcessPercentage(Number(percentage));
+                        }}
+                     />
+                  ) : (
+                     textBtn
+                  )}
+               </Button3D>
+            </div>
+         </MainLayout>
+
+         {/* OPEN FARMING MODAL */}
+         <Dialog open={openFarming} onOpenChange={setOpenFarming}>
+            <DialogContent>
+               <VisuallyHidden.Root>
+                  <DialogHeader>
+                     <DialogTitle>Edit profile</DialogTitle>
+                     <DialogDescription>
+                        Make changes to your profile here. Click save when
+                        you're done.
+                     </DialogDescription>
+                  </DialogHeader>
+               </VisuallyHidden.Root>
+               <div className="flex flex-col gap-3">
+                  {FARMING_LIST.map((farm, key) => (
+                     <SelectFarming
+                        key={key}
+                        id={farm.name}
+                        value={farm.name}
+                        onChange={(value, state) => {
+                           setFarming(value);
+                        }}
+                        metadata={farm}
+                        checked={farm.name === farming}
+                     />
+                  ))}
+               </div>
+               <div className="mt-6 space-y-3">
+                  <Button3D
+                     onClick={() => {
+                        console.log('claimed');
+                     }}
+                  >
+                     Start Farming
+                  </Button3D>
+               </div>
+            </DialogContent>
+         </Dialog>
+      </>
    );
 }
