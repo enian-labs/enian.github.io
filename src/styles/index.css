@@ -72,6 +72,10 @@
    .daily-quest-text {
       @apply text-base/normal font-bold tracking-[0.32px] [text-shadow:0px_4px_4px_rgba(0,0,0,0.25)];
    }
+
+   .select-farming {
+      @apply flex items-center justify-between space-x-4 rounded-lg p-3 peer-checked:border-gray-600 peer-checked:bg-[radial-gradient(151.92%_127.02%_at_15.32%_21.04%,rgba(165,239,255,0.20)_0%,rgba(110,191,244,0.04)_77.08%,rgba(70,144,212,0.00)_100%)] peer-checked:shadow-none peer-checked:backdrop-blur-md;
+   }
 }
 
 @layer utilities {
@@ -112,6 +116,10 @@
          0px 2.08px 4.159px rgba(0, 0, 0, 0.24),
          0px 2.08px 2.08px rgba(0, 0, 0, 0.22),
          0px 2.08px 4.159px rgba(0, 0, 0, 0.2);
+   }
+
+   .general-shadow-inset {
+      @apply border border-black/0 bg-black/10 shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80)_inset] backdrop-blur;
    }
 }
 

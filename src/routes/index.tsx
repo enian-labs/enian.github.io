@@ -63,6 +63,7 @@ function Dashboard() {
             await sleep(500);
             setProcess('START');
             setTextRender('Start Farming');
+            setFarming('');
             break;
 
          default:
@@ -149,6 +150,10 @@ function Dashboard() {
                {/* START FARMING */}
                <Button3D
                   onClick={() => {
+                     if (process === 'END') {
+                        handleProcess();
+                        return;
+                     }
                      setOpenFarming(true);
                   }}
                   disabled={process === 'PROCESS'}
@@ -193,7 +198,7 @@ function Dashboard() {
                         key={key}
                         id={farm.name}
                         value={farm.name}
-                        onChange={(value, state) => {
+                        onChange={(value) => {
                            setFarming(value);
                         }}
                         metadata={farm}
@@ -204,7 +209,9 @@ function Dashboard() {
                <div className="mt-6 space-y-3">
                   <Button3D
                      onClick={() => {
-                        console.log('claimed');
+                        if (!farming) return;
+                        handleProcess();
+                        setOpenFarming(false);
                      }}
                   >
                      Start Farming

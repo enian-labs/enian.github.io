@@ -1,5 +1,6 @@
 import Image from '@/lib/Image';
 import { cn } from '@/lib/utils';
+import { CheckFat } from '@phosphor-icons/react/dist/ssr';
 import React from 'react';
 
 export type SelectFarmingProps = {
@@ -22,8 +23,6 @@ export default function SelectFarming({
    onChange,
    metadata,
 }: SelectFarmingProps) {
-   const [selected, setSelected] = React.useState(checked);
-
    return (
       <div>
          <input
@@ -35,14 +34,10 @@ export default function SelectFarming({
             checked={checked}
             onChange={(ev) => {
                const target = ev.currentTarget;
-               setSelected(target.checked);
                onChange?.(target.value, target.checked);
             }}
          />
-         <label
-            htmlFor={id}
-            className="flex items-center justify-between space-x-4 rounded-lg border border-black/0 bg-black/10 p-3 shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80)_inset] backdrop-blur peer-checked:border-gray-600 peer-checked:bg-[radial-gradient(151.92%_127.02%_at_15.32%_21.04%,rgba(165,239,255,0.20)_0%,rgba(110,191,244,0.04)_77.08%,rgba(70,144,212,0.00)_100%)] peer-checked:shadow-none peer-checked:backdrop-blur-md"
-         >
+         <label htmlFor={id} className="general-shadow-inset select-farming">
             <div className="flex items-center space-x-4">
                <div className="size-11 min-w-11">
                   <Image
@@ -63,11 +58,14 @@ export default function SelectFarming({
             </div>
 
             <span
-               className={cn('hidden text-white', {
-                  block: checked,
-               })}
+               className={cn(
+                  'general-shadow-inset hidden size-[2.375rem] min-w-[2.375rem] items-center justify-center rounded-full text-white',
+                  {
+                     flex: checked,
+                  }
+               )}
             >
-               Check
+               <CheckFat size={16} weight="fill" />
             </span>
          </label>
       </div>
