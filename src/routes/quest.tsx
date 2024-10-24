@@ -14,6 +14,7 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import DailyQuestCard from '@/components/pages/quest/DailyQuestCard';
 import { Button3D } from '@/components/ui/button-3d';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export const Route = createFileRoute('/quest')({
    component: Quest,
@@ -21,6 +22,13 @@ export const Route = createFileRoute('/quest')({
 
 function Quest() {
    const [openDaily, setOpenDaily] = React.useState(false);
+   const [daily, setDaily] = React.useState<{
+      count: number;
+      status: 'start' | 'claimed';
+   }>({
+      count: 1,
+      status: 'start',
+   });
 
    return (
       <>
@@ -39,6 +47,7 @@ function Quest() {
                         type: 'other',
                      }}
                      onClick={() => setOpenDaily(true)}
+                     questType={daily.status === 'start' ? 'start' : 'claimed'}
                   />
                   <QuestCard
                      metadata={{
@@ -79,43 +88,65 @@ function Quest() {
                   </DialogHeader>
                </VisuallyHidden.Root>
                <div className="flex flex-wrap justify-center gap-1.5">
-                  {Array.from({ length: 7 }).map((_, key) => (
-                     <div key={key}>
-                        <DailyQuestCard
-                           metadata={{
-                              title: `Day ${key + 1}`,
-                              status: key === 0 ? 'claimed' : 'start',
-                              value: '5.000',
-                           }}
-                        />
-                     </div>
-                  ))}
+                  {Array.from({ length: 7 }).map((_, key) => {
+                     const day = key + 1;
+                     return (
+                        <div key={key}>
+                           <DailyQuestCard
+                              metadata={{
+                                 title: `Day ${day}`,
+                                 status:
+                                    day === daily.count
+                                       ? daily.status
+                                       : 'start',
+                                 value: '5.000',
+                              }}
+                           />
+                        </div>
+                     );
+                  })}
                </div>
                <div className="mt-6 space-y-3">
                   <Button3D
                      onClick={() => {
-                        console.log('claimed');
+                        setDaily({
+                           ...daily,
+                           status: 'claimed',
+                        });
                      }}
                      // for comeback tomorrow
 
-                     // btnClassName="bg-pushable-process-gradient relative"
-                     // disabled
-                     // percentage="100"
+                     btnClassName={cn({
+                        'bg-pushable-process-gradient relative':
+                           daily.status === 'claimed',
+                     })}
+                     disabled={daily.status === 'claimed'}
+                     percentage={daily.status === 'claimed' ? '100' : undefined}
                   >
-                     <span className="relative z-[5]">GET 5.000 GOLD</span>
+                     <span className="relative z-[5]">
+                        {daily.status === 'claimed'
+                           ? 'Come back tomorrow'
+                           : 'GET 5.000 GOLD'}
+                     </span>
                   </Button3D>
-                  <Button
-                     size={'lg'}
-                     type="button"
-                     className="btn-ads"
-                     onClick={() => {
-                        console.log(
-                           'see ads first then claimed after end of ads'
-                        );
-                     }}
-                  >
-                     <span>WATCH ADS TO DOUBLE IT</span>
-                  </Button>
+                  {daily.status === 'start' && (
+                     <Button
+                        size={'lg'}
+                        type="button"
+                        className="btn-ads"
+                        onClick={() => {
+                           console.log(
+                              'see ads first then claimed after end of ads'
+                           );
+                           setDaily({
+                              ...daily,
+                              status: 'claimed',
+                           });
+                        }}
+                     >
+                        <span>WATCH ADS TO DOUBLE IT</span>
+                     </Button>
+                  )}
                </div>
             </DialogContent>
          </Dialog>
