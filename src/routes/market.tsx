@@ -7,8 +7,11 @@ export const Route = createFileRoute('/market')({
 
 function Market() {
    return (
-      <MainLayout>
-         <div className="p-2">
+      <MainLayout
+         wrapperClassName="p-5 ty:gap-6 h-screen"
+         navClassName="ty:pb-0"
+      >
+         <div className="flex flex-1 flex-col">
             <h3 className="text-cyan-500">Market | Enian Combat!</h3>
          </div>
       </MainLayout>

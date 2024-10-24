@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import { cn } from '@/lib/utils';
+import ProfilBadge from '../pages/gameplay/ProfilBadge';
 
 export default function MainLayout({
    children,
@@ -20,6 +21,7 @@ export default function MainLayout({
                   wrapperClassName
                )}
             >
+               <ProfilBadge />
                {children}
                {/* footer menu */}
                <Navigation className={navClassName} />

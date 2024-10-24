@@ -76,8 +76,10 @@ function Dashboard() {
 
    return (
       <>
-         <MainLayout>
-            <ProfilBadge />
+         <MainLayout
+            wrapperClassName="p-5 ty:gap-6 h-screen"
+            navClassName="ty:pb-0"
+         >
             <div className="flex flex-1 flex-col items-center justify-end">
                <div className="relative mb-4 w-full ty:mb-[1.375rem]">
                   <Image

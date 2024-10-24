@@ -36,7 +36,6 @@ function Quest() {
             wrapperClassName="p-5 ty:gap-6 h-screen"
             navClassName="ty:pb-0"
          >
-            <ProfilBadge />
             <div className="no-scrollbar flex flex-1 flex-col overflow-y-scroll">
                <h3 className="quest-title mb-3">DAILY QUEST</h3>
                <div className="grid w-full gap-3">
@@ -109,21 +108,28 @@ function Quest() {
                <div className="mt-6 space-y-3">
                   <Button3D
                      onClick={() => {
+                        if (daily.status === 'claimed') {
+                           setOpenDaily(false);
+                           return;
+                        }
                         setDaily({
                            ...daily,
                            status: 'claimed',
                         });
                      }}
-                     // for comeback tomorrow
-
                      btnClassName={cn({
                         'bg-pushable-process-gradient relative':
                            daily.status === 'claimed',
                      })}
                      disabled={daily.status === 'claimed'}
                      percentage={daily.status === 'claimed' ? '100' : undefined}
+                     isClickable
                   >
-                     <span className="relative z-[5]">
+                     <span
+                        className={cn('relative z-[5]', {
+                           capitalize: daily.status === 'claimed',
+                        })}
+                     >
                         {daily.status === 'claimed'
                            ? 'Come back tomorrow'
                            : 'GET 5.000 GOLD'}

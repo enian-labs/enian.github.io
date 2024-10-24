@@ -8,6 +8,7 @@ export type Button3DProps = {
    btnClassName?: string;
    percentage?: string;
    textClassName?: string;
+   isClickable?: boolean;
 };
 
 export function Button3D({
@@ -17,6 +18,7 @@ export function Button3D({
    btnClassName,
    percentage,
    textClassName,
+   isClickable = false,
 }: Button3DProps) {
    return (
       // outer shadow
@@ -24,7 +26,7 @@ export function Button3D({
          type="button"
          className={cn('pushable bg-pushable-gradient', btnClassName)}
          onClick={onClick}
-         disabled={disabled}
+         disabled={disabled && !isClickable}
       >
          {/* button fill */}
          <div
