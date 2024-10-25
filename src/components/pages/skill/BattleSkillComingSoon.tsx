@@ -1,9 +1,16 @@
 import Image from "@/lib/Image";
-import { Link } from "@tanstack/react-router";
+import { cn } from "@/lib/utils";
 
-export default function BattleSkillComingSoon() {
+interface BattleSkillComingSoonProps {
+  className?: string;
+}
+
+export default function BattleSkillComingSoon({ className }: BattleSkillComingSoonProps) {
   return (
-    <div className="flex flex-col w-full h-full justify-center items-center gap-8 text-white p-8">
+    <div className={cn(
+      "flex flex-col w-full h-full justify-center items-center gap-8 text-white p-8 transition duration-200 ease-out",
+      className,
+    )}>
       <div className="flex flex-col gap-4 items-center">
         <p className="font-bold text-3xl">COMING SOON</p>
         <p className="text-center text-base]">

@@ -2,6 +2,7 @@ import MainLayout from '@/components/layouts/MainLayout';
 import BattleSkillComingSoon from '@/components/pages/skill/BattleSkillComingSoon';
 import FarmingSkillList from '@/components/pages/skill/FarmingSkillList';
 import Menu from '@/components/ui/menu';
+import { cn } from '@/lib/utils';
 import { FarmingSkillDataItem } from '@/types/skill';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
@@ -56,15 +57,18 @@ function Skill() {
                activeLayoutId="skill-menu"
             />
             <div className='w-full h-full'>
-               {selectedTab === tabsMenu[0].key && (
-                  <FarmingSkillList
-                     data={farmingSkills}
-                     key='farming-skill-list'
-                  />
-               )}
-               {selectedTab === tabsMenu[1].key && (
-                  <BattleSkillComingSoon />
-               )}
+               <FarmingSkillList
+                  className={cn(
+                     selectedTab === tabsMenu[0].key ? "flex" : "hidden",
+                  )}
+                  data={farmingSkills}
+                  key='farming-skill-list'
+               />
+               <BattleSkillComingSoon
+                  className={cn(
+                     selectedTab === tabsMenu[1].key ? "flex" : "hidden",
+                  )}
+               />
             </div>
          </div>
       </MainLayout>
