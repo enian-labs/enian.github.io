@@ -1,19 +1,7 @@
 import Image from '@/lib/Image';
 import { cn } from '@/lib/utils';
+import { SelectFarmingProps } from '@/types/gameplay';
 import { CheckFat } from '@phosphor-icons/react/dist/ssr';
-import React from 'react';
-
-export type SelectFarmingProps = {
-   id: string;
-   value?: string;
-   name?: string;
-   checked?: boolean;
-   onChange?: (value: string, state: boolean) => void;
-   metadata: {
-      name: string;
-      img: string;
-   };
-};
 
 export default function SelectFarming({
    id,

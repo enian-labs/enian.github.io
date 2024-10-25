@@ -1,15 +1,7 @@
 import Image from '@/lib/Image';
 import { cn } from '@/lib/utils';
-import { Check, CheckFat } from '@phosphor-icons/react';
-import React from 'react';
-
-export type DailyQuestCardProps = {
-   metadata?: {
-      title: string;
-      status: 'claimed' | 'start';
-      value: string;
-   };
-};
+import { DailyQuestCardProps } from '@/types/quest';
+import { CheckFat } from '@phosphor-icons/react';
 
 export default function DailyQuestCard({ metadata }: DailyQuestCardProps) {
    return (

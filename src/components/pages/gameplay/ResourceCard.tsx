@@ -1,19 +1,13 @@
-import { RESOURCE_LIST } from '@/constant/core';
 import Image from '@/lib/Image';
 import { cn, letterFormatMoney } from '@/lib/utils';
-import React from 'react';
+import { ResourceCardProps } from '@/types/gameplay';
 
 export default function ResourceCard({
    item,
    className,
    textClassName,
    size,
-}: {
-   item: (typeof RESOURCE_LIST)[0];
-   className?: string;
-   textClassName?: string;
-   size?: number;
-}) {
+}: ResourceCardProps) {
    return (
       <div
          className={cn(

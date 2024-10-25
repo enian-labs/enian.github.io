@@ -1,12 +1,5 @@
 import { cn } from '@/lib/utils';
-import React from 'react';
-
-export type QuestCardButtonProps = {
-   onClick?: () => void;
-   className?: string;
-   children?: React.ReactNode;
-   disabled?: boolean;
-};
+import { QuestCardButtonProps } from '@/types/quest';
 
 export default function QuestCardButton({
    onClick,

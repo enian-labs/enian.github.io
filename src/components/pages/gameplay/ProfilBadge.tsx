@@ -1,5 +1,4 @@
 import Image from '@/lib/Image';
-import React from 'react';
 import ResourceCard from './ResourceCard';
 
 export default function ProfilBadge() {

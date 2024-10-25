@@ -1,21 +1,9 @@
 import Image from '@/lib/Image';
-import React from 'react';
 import { cn } from '@/lib/utils';
 import QuestCardButton from './QuestCard.Button';
 import { CaretDoubleRight, CheckFat } from '@phosphor-icons/react';
 import { Button3D } from '@/components/ui/button-3d';
-
-type QuestCardProps = {
-   onClick?: () => void;
-   className?: string;
-   btnClassName?: string;
-   questType?: 'start' | 'verify' | 'claim' | 'claimed';
-   metadata: {
-      title: string;
-      reward: string;
-      type: 'telegram' | 'x' | 'url' | 'other';
-   };
-};
+import { QuestCardProps } from '@/types/quest';
 
 export default function QuestCard({
    onClick,

@@ -1,11 +1,6 @@
 import Image from '@/lib/Image';
 import { cn } from '@/lib/utils';
-import React from 'react';
-
-type FarmingBubbleProps = {
-   className?: string;
-   type: string;
-};
+import { FarmingBubbleProps } from '@/types/gameplay';
 
 export default function FarmingBubble({ className, type }: FarmingBubbleProps) {
    const getImg = (type: string): string => {
