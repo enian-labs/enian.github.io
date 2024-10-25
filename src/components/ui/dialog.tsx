@@ -28,21 +28,28 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
+type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+   iconImageUrl?: string;
+};
+
 const DialogContent = React.forwardRef<
    React.ElementRef<typeof DialogPrimitive.Content>,
-   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+   DialogContentProps
+>(({ className, iconImageUrl, children, ...props }, ref) => (
+
    <DialogPortal>
-      <DialogOverlay>
+      <DialogOverlay
+         className="flex justify-center items-center w-limit"
+      >
          <DialogPrimitive.Content
             ref={ref}
             className={cn(
-               'bg-modal-daily z-50 mt-[122px] grid w-full max-w-[30rem] rounded-3xl border border-gray-600 p-5 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%]',
+               'bg-modal-daily z-50 mt-[122px] grid w-full max-w-[30rem] rounded-3xl border border-gray-600 p-5 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] translate-y-[-20%]',
                className
             )}
             {...props}
          >
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 z-10">
                <Image
                   alt="daily"
                   src="/assets/quest/icon-other.svg"
@@ -50,6 +57,16 @@ const DialogContent = React.forwardRef<
                   height={120}
                />
             </div>
+            {iconImageUrl && (
+               <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] z-20">
+                  <Image
+                     alt="daily"
+                     src={iconImageUrl}
+                     width={100}
+                     height={100}
+                  />
+               </div>
+            )}
             <div className="h-[60px]"></div>
             {children}
             <DialogPrimitive.Close className="absolute right-4 top-4 rounded-full border-[0.5px] border-black/0 bg-black/10 p-2.5 text-white shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80)_inset] backdrop-blur transition-opacity hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-offset-0 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-white">

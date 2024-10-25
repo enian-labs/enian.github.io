@@ -35,6 +35,7 @@ function Quest() {
          <MainLayout
             wrapperClassName="p-5 ty:gap-6 h-screen"
             navClassName="ty:pb-0"
+            bgUrl='/assets/background/tavern.jpeg'
          >
             <div className="no-scrollbar flex flex-1 flex-col overflow-y-scroll">
                <h3 className="quest-title mb-3">DAILY QUEST</h3>

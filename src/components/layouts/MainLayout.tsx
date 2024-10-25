@@ -7,10 +7,12 @@ export default function MainLayout({
    children,
    wrapperClassName,
    navClassName,
+   bgUrl = '/assets/background/bg-main.svg',
 }: {
    children: React.ReactNode;
    wrapperClassName?: string;
    navClassName?: string;
+   bgUrl?: string;
 }) {
    return (
       <div className="flex flex-1 flex-col">
@@ -20,6 +22,9 @@ export default function MainLayout({
                   'w-limit bg-main relative flex flex-1 flex-col gap-4 ty:gap-5',
                   wrapperClassName
                )}
+               style={{
+                  backgroundImage: `url(${bgUrl})`,
+               }}
             >
                <ProfilBadge />
                {children}
