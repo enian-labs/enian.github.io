@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect, useSearch } from '@tanstack/react-router';
 import Image from '@/lib/Image';
 import { FARMING_LIST, RESOURCE_LIST } from '@/constant/core';
 import ResourceCard from '@/components/pages/gameplay/ResourceCard';
@@ -22,6 +22,17 @@ import FarmingBubble from '@/components/pages/gameplay/FarmingBubble';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
+   beforeLoad: ({ location }) => {
+      const searchParams = location.search as { [key: string]: string };
+      if (searchParams.todo !== 'play') {
+         throw redirect({
+            to: '/onboarding',
+            search: {
+               todo: 'onboarding',
+            },
+         });
+      }
+   },
 });
 
 function Dashboard() {

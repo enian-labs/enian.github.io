@@ -35,7 +35,7 @@ function Quest() {
          <MainLayout
             wrapperClassName="p-5 ty:gap-6 h-screen"
             navClassName="ty:pb-0"
-            bgUrl='/assets/background/tavern.jpeg'
+            bgUrl="/assets/background/tavern.jpeg"
          >
             <div className="no-scrollbar flex flex-1 flex-col overflow-y-scroll">
                <h3 className="quest-title mb-3">DAILY QUEST</h3>
@@ -87,7 +87,7 @@ function Quest() {
                      </DialogDescription>
                   </DialogHeader>
                </VisuallyHidden.Root>
-               <div className="flex flex-wrap justify-center gap-1.5">
+               <div className="mt-3 flex flex-wrap justify-center gap-1.5">
                   {Array.from({ length: 7 }).map((_, key) => {
                      const day = key + 1;
                      return (
@@ -106,7 +106,7 @@ function Quest() {
                      );
                   })}
                </div>
-               <div className="mt-6 space-y-3">
+               <div className="mt-6 space-y-2 p-5 pt-0">
                   <Button3D
                      onClick={() => {
                         if (daily.status === 'claimed') {

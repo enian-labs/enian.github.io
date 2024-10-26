@@ -28,7 +28,7 @@
    }
 
    .bg-splash {
-      @apply h-full bg-[url('/assets/splash-screen.svg')] bg-cover bg-center bg-no-repeat;
+      @apply h-full bg-[url('/assets/background/splash.jpeg')] bg-cover bg-center bg-no-repeat;
    }
 
    /* bg in navigation */

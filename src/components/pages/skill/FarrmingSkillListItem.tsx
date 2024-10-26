@@ -17,7 +17,7 @@ export default function FarmingSkillListItem({
    return (
       <div
          className={cn(
-            'w-limit border-custom-blue max-w-screen-xs rounded-[8px] border-[0.5px] bg-[radial-gradient(151.92%_127.02%_at_15.32%_21.04%,rgba(165,239,255,0.20)_0%,rgba(110,191,244,0.04)_77.08%,rgba(70,144,212,0.00)_100%)] shadow-2xl backdrop-blur-[6px]',
+            'w-limit max-w-screen-xs rounded-[8px] border-[0.5px] border-custom-blue bg-[radial-gradient(151.92%_127.02%_at_15.32%_21.04%,rgba(165,239,255,0.20)_0%,rgba(110,191,244,0.04)_77.08%,rgba(70,144,212,0.00)_100%)] shadow-2xl backdrop-blur-[6px]',
             'flex items-center justify-between gap-5 p-3 text-white'
          )}
       >
@@ -46,7 +46,11 @@ export default function FarmingSkillListItem({
          )}
          {/* OPEN FARMING MODAL */}
          <Dialog open={openUpgradeModal} onOpenChange={setOpenUpgradeModal}>
-            <DialogContent iconImageUrl={data.imageUrl}>
+            <DialogContent
+               iconImageUrl={data.imageUrl}
+               overlayClassName="place-items-start"
+               className="mt-[122px] translate-y-[-20%] p-3"
+            >
                <div className="flex flex-col gap-10 text-white">
                   <div className="flex flex-col items-center gap-2">
                      <p className="text-xl font-bold">

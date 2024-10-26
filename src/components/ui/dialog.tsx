@@ -20,7 +20,7 @@ const DialogOverlay = React.forwardRef<
    <DialogPrimitive.Overlay
       ref={ref}
       className={cn(
-         'fixed bottom-0 left-0 right-0 top-0 z-50 grid place-items-start overflow-y-auto bg-black/25 p-5 backdrop-blur data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+         'fixed bottom-0 left-0 right-0 top-0 z-50 grid place-items-center overflow-y-auto bg-black/25 p-3 backdrop-blur data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
          className
       )}
       {...props}
@@ -28,28 +28,33 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+type DialogContentProps = React.ComponentPropsWithoutRef<
+   typeof DialogPrimitive.Content
+> & {
    iconImageUrl?: string;
+   overlayClassName?: string;
 };
 
 const DialogContent = React.forwardRef<
    React.ElementRef<typeof DialogPrimitive.Content>,
    DialogContentProps
->(({ className, iconImageUrl, children, ...props }, ref) => (
-
+>(({ className, iconImageUrl, overlayClassName, children, ...props }, ref) => (
    <DialogPortal>
       <DialogOverlay
-         className="flex justify-center items-center w-limit"
+         className={cn(
+            'w-limit flex items-center justify-center',
+            overlayClassName
+         )}
       >
          <DialogPrimitive.Content
             ref={ref}
             className={cn(
-               'bg-modal-daily z-50 mt-[122px] grid w-full max-w-[30rem] rounded-3xl border border-gray-600 p-5 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] translate-y-[-20%]',
+               'bg-modal-daily z-50 grid w-full max-w-[30rem] rounded-3xl border border-gray-600 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%]',
                className
             )}
             {...props}
          >
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 z-10">
+            <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2">
                <Image
                   alt="daily"
                   src="/assets/quest/icon-other.svg"
@@ -58,7 +63,7 @@ const DialogContent = React.forwardRef<
                />
             </div>
             {iconImageUrl && (
-               <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] z-20">
+               <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-[55%]">
                   <Image
                      alt="daily"
                      src={iconImageUrl}
