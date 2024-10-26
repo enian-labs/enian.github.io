@@ -14,7 +14,7 @@ export default function ProfilBadge() {
             <ResourceCard
                size={60}
                item={{
-                  img: '/assets/resource/gold.svg',
+                  img: '/assets/original/resource/gold.svg',
                   name: 'gold',
                   total: 9522000,
                }}

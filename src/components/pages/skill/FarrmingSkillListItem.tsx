@@ -1,9 +1,16 @@
 import { Button3D } from '@/components/ui/button-3d';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import {
+   Dialog,
+   DialogContent,
+   DialogDescription,
+   DialogHeader,
+   DialogTitle,
+} from '@/components/ui/dialog';
 import Image from '@/lib/Image';
 import { cn } from '@/lib/utils';
 import { FarmingSkillDataItem } from '@/types/skill';
 import { useState } from 'react';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 interface FarmingSkillListItemProps {
    data: FarmingSkillDataItem;
@@ -51,6 +58,12 @@ export default function FarmingSkillListItem({
                overlayClassName="place-items-start"
                className="mt-[122px] translate-y-[-20%] p-3"
             >
+               <VisuallyHidden.Root>
+                  <DialogHeader>
+                     <DialogTitle>sr only</DialogTitle>
+                     <DialogDescription>sr only</DialogDescription>
+                  </DialogHeader>
+               </VisuallyHidden.Root>
                <div className="flex flex-col gap-10 text-white">
                   <div className="flex flex-col items-center gap-2">
                      <p className="text-xl font-bold">

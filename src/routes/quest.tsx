@@ -1,6 +1,5 @@
 import React from 'react';
 import MainLayout from '@/components/layouts/MainLayout';
-import ProfilBadge from '@/components/pages/gameplay/ProfilBadge';
 import QuestCard from '@/components/pages/quest/QuestCard';
 import { createFileRoute } from '@tanstack/react-router';
 import {

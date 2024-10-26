@@ -1,24 +1,27 @@
-import { FarmingSkillDataItem } from "@/types/skill";
-import FarmingSkillListItem from "./FarrmingSkillListItem";
-import { cn } from "@/lib/utils";
+import { FarmingSkillDataItem } from '@/types/skill';
+import FarmingSkillListItem from './FarrmingSkillListItem';
+import { cn } from '@/lib/utils';
 
 interface FarmingSkillList {
-  data: FarmingSkillDataItem[];
-  key?: string;
-  className?: string;
+   data: FarmingSkillDataItem[];
+   className?: string;
 }
 
-export default function FarmingSkillList({ data, key, className }: FarmingSkillList) {
-  return (
-    <div key={key} className={cn(
-      "flex flex-col gap-2 w-full overflow-y-scroll no-scrollbar transition",
-      className,
-    )}>
-      {data.map((item) => {
-        return (
-          <FarmingSkillListItem data={item} />
-        )
-      })}
-    </div>
-  )
+export default function FarmingSkillList({
+   data,
+
+   className,
+}: FarmingSkillList) {
+   return (
+      <div
+         className={cn(
+            'no-scrollbar flex w-full flex-col gap-2 overflow-y-scroll transition',
+            className
+         )}
+      >
+         {data.map((item) => {
+            return <FarmingSkillListItem key={item.name} data={item} />;
+         })}
+      </div>
+   );
 }
