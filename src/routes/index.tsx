@@ -19,6 +19,7 @@ import {
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import SelectFarming from '@/components/pages/gameplay/SelectFarming';
 import FarmingBubble from '@/components/pages/gameplay/FarmingBubble';
+import ResourceList from '@/components/pages/gameplay/ResourceList';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -94,20 +95,14 @@ function Dashboard() {
             <div className="flex flex-1 flex-col items-center justify-end">
                <div className="relative mb-4 w-full ty:mb-[1.375rem]">
                   <Image
-                     src="/assets/original/knight.svg"
+                     src="/assets/original/knight.png"
                      alt="knight"
                      width={328}
                      height={323}
                      className="mx-auto w-4/6 ty:w-auto"
                   />
                   {/* RESOURCES LIST */}
-                  <div className="absolute bottom-0 left-0 w-full">
-                     <div className="flex items-center justify-center gap-3">
-                        {RESOURCE_LIST.map((resource) => (
-                           <ResourceCard key={resource.name} item={resource} />
-                        ))}
-                     </div>
-                  </div>
+                  <ResourceList />
 
                   <>
                      {/* RESOURCE RESULT AFTER FARMING */}
@@ -172,7 +167,11 @@ function Dashboard() {
 
          {/* OPEN FARMING MODAL */}
          <Dialog open={openFarming} onOpenChange={setOpenFarming}>
-            <DialogContent className="p-3">
+            <DialogContent
+               className="p-3"
+               iconImageUrl="/assets/pickaxe.svg"
+               iconClassName="size-[52px]"
+            >
                <VisuallyHidden.Root>
                   <DialogHeader>
                      <DialogTitle>Edit profile</DialogTitle>

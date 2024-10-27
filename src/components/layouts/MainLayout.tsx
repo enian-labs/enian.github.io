@@ -7,7 +7,7 @@ export default function MainLayout({
    children,
    wrapperClassName,
    navClassName,
-   bgUrl = '/assets/background/bg-main.svg',
+   bgUrl = '/assets/background/bg-main.png',
 }: {
    children: React.ReactNode;
    wrapperClassName?: string;

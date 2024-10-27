@@ -3,7 +3,7 @@ import React from 'react';
 
 export type Button3DProps = {
    children?: React.ReactNode;
-   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+   onClick?: () => void;
    disabled?: boolean;
    btnClassName?: string;
    percentage?: string;
@@ -34,6 +34,7 @@ export function Button3D({
                'front bg-front-gradient relative overflow-hidden uppercase',
                textClassName
             )}
+            onClick={onClick}
          >
             {disabled && (
                <div

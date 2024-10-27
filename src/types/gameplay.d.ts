@@ -10,6 +10,7 @@ export type ResourceCardProps = {
    className?: string;
    textClassName?: string;
    size?: number;
+   total?: number;
 };
 
 export type SelectFarmingProps = {

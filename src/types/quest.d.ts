@@ -22,7 +22,11 @@ export type QuestCardProps = {
       id?: string;
       title: string;
       reward: string;
-      type: 'telegram' | 'x' | 'url' | 'other';
+      type: 'telegram' | 'x' | 'url' | 'other' | 'ads' | 'daily';
       url?: string;
    };
+};
+
+export type QuestCardIconProps = {
+   type?: QuestCardProps['metadata']['type'];
 };

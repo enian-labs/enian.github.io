@@ -30,22 +30,19 @@ export const NAVIGATION_LINKS: {
    },
 ];
 
-export const RESOURCE_LIST: { name: string; img: string; total: number }[] = [
+export const RESOURCE_LIST: { name: string; img: string }[] = [
    {
       name: 'wood',
       img: '/assets/original/resource/wood.svg',
-      total: 1200000,
    },
 
    {
       name: 'iron',
       img: '/assets/original/resource/iron.svg',
-      total: 122000,
    },
    {
       name: 'leather',
       img: '/assets/original/resource/leather.svg',
-      total: 16500,
    },
 ];
 

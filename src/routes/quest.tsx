@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainLayout from '@/components/layouts/MainLayout';
 import QuestCard from '@/components/pages/quest/QuestCard';
 import { createFileRoute } from '@tanstack/react-router';
@@ -14,10 +14,47 @@ import DailyQuestCard from '@/components/pages/quest/DailyQuestCard';
 import { Button3D } from '@/components/ui/button-3d';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { QuestCardProps } from '@/types/quest';
+import { useMockStore } from '@/stores/mock.store';
+import WebApp from '@twa-dev/sdk';
+import { handleProcessClaim } from '@/lib/processClaim';
 
 export const Route = createFileRoute('/quest')({
    component: Quest,
 });
+
+const DAILY_QUESTS: QuestCardProps['metadata'][] = [
+   {
+      id: 'daily-quest',
+      title: 'Daily Reward',
+      reward: '5000',
+      type: 'daily',
+   },
+   {
+      id: 'watch-ads',
+      title: 'Watch Ads',
+      reward: '10000',
+      type: 'ads',
+      url: 'https://www.youtube.com/watch?v=AfpItQBKl04&ab_channel=FCBarcelona',
+   },
+];
+
+const QUESTS: QuestCardProps['metadata'][] = [
+   {
+      id: 'join-enian-News',
+      title: 'Join Enian News',
+      reward: '20000',
+      type: 'telegram',
+      url: 'https://t.me/EnianCombatNews',
+   },
+   {
+      id: 'comment-like-post-community-1',
+      title: 'Comment & Like Post',
+      reward: '10000',
+      type: 'telegram',
+      url: 'https://t.me/EnianCombatCommunity',
+   },
+];
 
 function Quest() {
    const [openDaily, setOpenDaily] = React.useState(false);
@@ -28,6 +65,43 @@ function Quest() {
       count: 1,
       status: 'start',
    });
+   const { profile, setProfile } = useMockStore();
+
+   const handleDaily = (type: 'ads' | 'default' = 'default') => {
+      const quest = DAILY_QUESTS.find((q) => q.id === 'daily-quest');
+
+      setProfile({
+         ...profile!,
+         metadata: {
+            gold: [
+               ...profile?.metadata.gold!,
+               {
+                  id: quest?.id!,
+                  value: Number(quest?.reward || 0) * (type === 'ads' ? 2 : 1),
+                  status: 'claimed',
+               },
+            ],
+         },
+      });
+   };
+
+   useEffect(() => {
+      if (profile) {
+         const getDailyStatus = () => {
+            const checkingDaily = profile.metadata.gold.find(
+               (q) => q.id === 'daily-quest'
+            );
+
+            if (checkingDaily) {
+               setDaily({
+                  count: 1,
+                  status: 'claimed',
+               });
+            }
+         };
+         getDailyStatus();
+      }
+   }, [profile]);
 
    return (
       <>
@@ -39,44 +113,66 @@ function Quest() {
             <div className="no-scrollbar flex flex-1 flex-col overflow-y-scroll">
                <h3 className="quest-title mb-3">DAILY QUEST</h3>
                <div className="grid w-full gap-3">
-                  <QuestCard
-                     metadata={{
-                        title: 'Daily Reward',
-                        reward: '5000',
-                        type: 'other',
-                     }}
-                     onClick={() => setOpenDaily(true)}
-                     questType={daily.status === 'start' ? 'start' : 'claimed'}
-                  />
-                  <QuestCard
-                     metadata={{
-                        title: 'Watch Ads',
-                        reward: '10000',
-                        type: 'other',
-                     }}
-                  />
+                  {DAILY_QUESTS.map((daily_quest, key) => {
+                     const check = profile?.metadata.gold.find(
+                        (q) => q.id === daily_quest.id
+                     );
+                     console.log(`quest ${check?.id} already clicked`);
+                     return (
+                        <QuestCard
+                           key={key}
+                           metadata={daily_quest}
+                           questType={check ? check.status : 'start'}
+                           onClick={() => {
+                              if (daily_quest.id === 'daily-quest') {
+                                 setOpenDaily(true);
+                                 return;
+                              }
+
+                              handleProcessClaim(
+                                 check!,
+                                 daily_quest,
+                                 profile,
+                                 setProfile
+                              );
+                           }}
+                        />
+                     );
+                  })}
                </div>
                <h3 className="quest-title mb-3 mt-4">QUEST LIST</h3>
                <div className="grid w-full gap-3">
-                  {Array.from({
-                     length: 10,
-                  }).map((_, key) => (
-                     <QuestCard
-                        key={key}
-                        metadata={{
-                           title: `Quest List ${key + 1}`,
-                           reward: '10000',
-                           type: 'other',
-                        }}
-                     />
-                  ))}
+                  {QUESTS.map((quest, key) => {
+                     const check = profile?.metadata.gold.find(
+                        (q) => q.id === quest.id
+                     );
+                     console.log(`quest ${check?.id} already clicked`);
+                     return (
+                        <QuestCard
+                           key={key}
+                           metadata={quest}
+                           questType={check ? check.status : 'start'}
+                           onClick={() =>
+                              handleProcessClaim(
+                                 check!,
+                                 quest,
+                                 profile,
+                                 setProfile
+                              )
+                           }
+                        />
+                     );
+                  })}
                </div>
             </div>
          </MainLayout>
 
          {/* OPEN DAILY MODAL */}
          <Dialog open={openDaily} onOpenChange={setOpenDaily}>
-            <DialogContent>
+            <DialogContent
+               iconImageUrl="/assets/quest/gift.svg"
+               iconClassName="size-[52px]"
+            >
                <VisuallyHidden.Root>
                   <DialogHeader>
                      <DialogTitle>Edit profile</DialogTitle>
@@ -116,6 +212,8 @@ function Quest() {
                            ...daily,
                            status: 'claimed',
                         });
+
+                        handleDaily();
                      }}
                      btnClassName={cn({
                         'bg-pushable-process-gradient relative':
@@ -148,6 +246,8 @@ function Quest() {
                               ...daily,
                               status: 'claimed',
                            });
+
+                           handleDaily('ads');
                         }}
                      >
                         <span>WATCH ADS TO DOUBLE IT</span>

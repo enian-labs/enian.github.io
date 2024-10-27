@@ -1,9 +1,9 @@
+import { handleProcessClaim } from '@/lib/processClaim';
 import QuestCard from '../quest/QuestCard';
 import { Button3D } from '@/components/ui/button-3d';
 import { useMockStore } from '@/stores/mock.store';
 import { QuestCardProps } from '@/types/quest';
 import { useNavigate } from '@tanstack/react-router';
-import WebApp from '@twa-dev/sdk';
 
 const ONBOARDING_QUEST: QuestCardProps['metadata'][] = [
    {
@@ -38,7 +38,7 @@ export default function OnboardingQuest() {
          </div>
          <div className="mb-6 grid w-full gap-3">
             {ONBOARDING_QUEST.map((quest, key) => {
-               const check = profile?.metadata.gold?.find(
+               const check = profile?.metadata.gold.find(
                   (q) => q.id === quest.id
                );
                console.log(`quest ${check?.id} already clicked`);
@@ -47,61 +47,9 @@ export default function OnboardingQuest() {
                      key={key}
                      metadata={quest}
                      questType={check ? check.status : 'start'}
-                     onClick={() => {
-                        if (!check?.status) {
-                           // open link telegram
-                           if (quest.type === 'x') {
-                              WebApp.openLink(quest.url!);
-                           } else if (quest.type === 'telegram') {
-                              WebApp.openTelegramLink(quest.url!);
-                           }
-                        }
-
-                        if (check?.status === 'claimed') {
-                           // return nothing when clicked again
-                           console.log(`quest ${quest.title} already claimed`);
-                           return;
-                        }
-
-                        if (check?.status === 'claim') {
-                           // change to claimed when after click
-                           const newGold = profile?.metadata.gold.map(
-                              (gold) => {
-                                 if (gold.id === quest.id) {
-                                    return {
-                                       id: gold.id,
-                                       status: 'claimed' as typeof gold.status,
-                                       value: gold.value,
-                                    };
-                                 } else {
-                                    return gold;
-                                 }
-                              }
-                           );
-
-                           setProfile({
-                              ...profile!,
-                              metadata: {
-                                 gold: newGold!,
-                              },
-                           });
-                        } else {
-                           // click for the first time
-                           setProfile({
-                              ...profile!,
-                              metadata: {
-                                 gold: [
-                                    ...profile?.metadata.gold!,
-                                    {
-                                       id: quest.id!,
-                                       value: quest.reward,
-                                       status: 'claim',
-                                    },
-                                 ],
-                              },
-                           });
-                        }
-                     }}
+                     onClick={() =>
+                        handleProcessClaim(check!, quest, profile, setProfile)
+                     }
                   />
                );
             })}

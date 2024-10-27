@@ -1,9 +1,10 @@
 import Image from '@/lib/Image';
-import { cn, formatPrice, formatPriceWithoutSymbol } from '@/lib/utils';
+import { cn, formatPriceWithoutSymbol } from '@/lib/utils';
 import QuestCardButton from './QuestCard.Button';
 import { CaretDoubleRight, CheckFat } from '@phosphor-icons/react';
 import { Button3D } from '@/components/ui/button-3d';
 import { QuestCardProps } from '@/types/quest';
+import QuestCardIcon from './QuestCard.Icon';
 
 export default function QuestCard({
    onClick,
@@ -20,25 +21,9 @@ export default function QuestCard({
                className
             )}
          >
-            <div className="flex items-center space-x-4">
+            <div className="flex items-start space-x-4">
                <div className="size-[3.125rem] min-w-[3.125rem]">
-                  {metadata.type !== 'other' ? (
-                     <Image
-                        alt="mission"
-                        src={
-                           metadata.type === 'x'
-                              ? '/assets/quest/icon-x.svg'
-                              : '/assets/quest/icon-telegram.svg'
-                        }
-                        className="size-[3.125rem]"
-                     />
-                  ) : (
-                     <Image
-                        alt="mission"
-                        src="/assets/quest/icon-other.svg"
-                        className="size-[3.125rem]"
-                     />
-                  )}
+                  <QuestCardIcon type={metadata.type} />
                </div>
                <div className="flex flex-col text-white">
                   <h3 className="text-shadow-age-title text-lg font-bold">

@@ -13,7 +13,7 @@ export default function Navigation({ className }: NavigationProps) {
    return (
       <footer
          className={cn(
-            'sticky bottom-0 left-0 w-full pb-4 pt-0 ty:pb-[1.875rem]',
+            'sticky bottom-0 left-0 w-full pb-0 pt-0 ty:pb-[1.875rem]',
             className
          )}
       >

@@ -7,6 +7,7 @@ export default function ResourceCard({
    className,
    textClassName,
    size,
+   total = 0,
 }: ResourceCardProps) {
    return (
       <div
@@ -27,7 +28,7 @@ export default function ResourceCard({
                textClassName
             )}
          >
-            {letterFormatMoney(item.total, 3)}
+            {letterFormatMoney(total, 3)}
          </div>
       </div>
    );

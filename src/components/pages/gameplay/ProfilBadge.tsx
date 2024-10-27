@@ -37,10 +37,10 @@ export default function ProfilBadge() {
                item={{
                   img: '/assets/original/resource/gold.svg',
                   name: 'gold',
-                  total: totalResource,
                }}
                className="h-[3.2rem] gap-4"
                textClassName="py-[1.125rem] pr-7 text-lg"
+               total={totalResource}
             />
          </div>
       </div>
