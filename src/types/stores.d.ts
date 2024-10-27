@@ -27,4 +27,5 @@ export type SkillTypes = {
    exp: number;
    desc: string;
    imageUrl: string;
+   resource: 'wood' | 'iron' | 'leather';
 };

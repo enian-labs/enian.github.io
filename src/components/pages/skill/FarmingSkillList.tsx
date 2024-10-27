@@ -1,15 +1,15 @@
 import { FarmingSkillDataItem } from '@/types/skill';
 import FarmingSkillListItem from './FarrmingSkillListItem';
 import { cn } from '@/lib/utils';
+import { SkillTypes } from '@/types/stores';
 
 interface FarmingSkillList {
-   data: FarmingSkillDataItem[];
+   data: SkillTypes[];
    className?: string;
 }
 
 export default function FarmingSkillList({
    data,
-
    className,
 }: FarmingSkillList) {
    return (

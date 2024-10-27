@@ -34,7 +34,6 @@ export function Button3D({
                'front bg-front-gradient relative overflow-hidden uppercase',
                textClassName
             )}
-            onClick={onClick}
          >
             {disabled && (
                <div

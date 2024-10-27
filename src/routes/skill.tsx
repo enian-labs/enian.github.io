@@ -2,6 +2,7 @@ import MainLayout from '@/components/layouts/MainLayout';
 import BattleSkillComingSoon from '@/components/pages/skill/BattleSkillComingSoon';
 import FarmingSkillList from '@/components/pages/skill/FarmingSkillList';
 import Menu from '@/components/ui/menu';
+import { DEFAULT_SKILL } from '@/constant/store.const';
 import { cn } from '@/lib/utils';
 import { FarmingSkillDataItem } from '@/types/skill';
 import { createFileRoute } from '@tanstack/react-router';
@@ -61,7 +62,7 @@ function Skill() {
                   className={cn(
                      selectedTab === tabsMenu[0].key ? 'flex' : 'hidden'
                   )}
-                  data={farmingSkills}
+                  data={DEFAULT_SKILL}
                   key="farming-skill-list"
                />
                <BattleSkillComingSoon

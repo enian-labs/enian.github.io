@@ -11,9 +11,10 @@ import { cn } from '@/lib/utils';
 import { FarmingSkillDataItem } from '@/types/skill';
 import { useState } from 'react';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { SkillTypes } from '@/types/stores';
 
 interface FarmingSkillListItemProps {
-   data: FarmingSkillDataItem;
+   data: SkillTypes;
 }
 
 export default function FarmingSkillListItem({
@@ -34,23 +35,22 @@ export default function FarmingSkillListItem({
             className="h-[48px] w-[48px]"
          />
          <div className="flex w-full flex-col gap-0.5">
-            <p className="text-lg font-bold">
-               {data.name} - Lv{' '}
-               {typeof data.level === 'string'
-                  ? data.level.toUpperCase()
-                  : data.level}
+            <p className="whitespace-pre-wrap text-lg font-bold">
+               {data.name} - Lv {data.level === 100 ? 'MAX' : data.level}
             </p>
-            <p className="text-sm text-yellow-400">{data.benefit}</p>
+            <p className="text-sm capitalize text-yellow-400">
+               +{data.claimedResource} {data.resource}/8h
+            </p>
          </div>
-         {typeof data.level !== 'string' && (
-            <Button3D
-               btnClassName="mt-3 w-fit"
-               onClick={() => setOpenUpgradeModal(true)}
-               textClassName="text-base py-1.5 px-4 -translate-y-1"
-            >
-               UPGRADE
-            </Button3D>
-         )}
+
+         <Button3D
+            btnClassName="mt-3 w-fit"
+            onClick={() => setOpenUpgradeModal(true)}
+            textClassName="text-base py-1.5 px-4 -translate-y-1 capitalize"
+         >
+            Look
+         </Button3D>
+
          {/* OPEN FARMING MODAL */}
          <Dialog open={openUpgradeModal} onOpenChange={setOpenUpgradeModal}>
             <DialogContent
@@ -68,22 +68,21 @@ export default function FarmingSkillListItem({
                   <div className="flex flex-col items-center gap-2">
                      <p className="text-xl font-bold">
                         {data.name} - Lv{' '}
-                        {typeof data.level === 'string'
-                           ? data.level.toUpperCase()
-                           : data.level}
+                        {data.level === 100 ? 'MAX' : data.level}
                      </p>
-                     <p className="text-center text-base">
-                        Unlocking the ability to mine iron while chopping trees.
-                        Upgrade your tools to increase resource efficiency and
-                        speed.
+                     <p className="text-xs font-medium text-[#FFB961]">
+                        {data.exp} / {data.expNeededToNextLevel}
                      </p>
+                     <p className="text-center text-base">{data.desc}</p>
                   </div>
                   <div className="flex gap-2">
                      <div className="flex w-full flex-col gap-1 rounded-[8px] border border-black/0 bg-black/5 px-3.5 py-2 text-base font-bold text-white shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80)_inset]">
                         <p className="text-xs font-medium text-[#FFB961]">
                            Next Level Benefit
                         </p>
-                        <p className="text-base font-bold">{data.benefit}</p>
+                        <p className="text-base font-bold capitalize">
+                           +{data.nextClaimedResource} {data.resource}/8h
+                        </p>
                      </div>
                      <div className="flex w-full flex-col gap-1 rounded-[8px] border border-black/0 bg-black/5 px-3.5 py-2 text-base font-bold text-white shadow-[0px_0px_13px_0px_rgba(0,0,0,0.80)_inset]">
                         <p className="text-xs font-medium text-[#FFB961]">
@@ -96,7 +95,17 @@ export default function FarmingSkillListItem({
                   </div>
                </div>
                <div className="mt-6 space-y-3">
-                  <Button3D onClick={() => {}}>Upgrade Now</Button3D>
+                  <Button3D
+                     btnClassName={cn({
+                        'bg-pushable-process-gradient relative':
+                           data.level === 1,
+                     })}
+                     disabled={data.level === 1}
+                     percentage={data.level === 1 ? '100' : undefined}
+                     onClick={() => {}}
+                  >
+                     <span className={cn('relative z-[5]')}>Fast Upgrade</span>
+                  </Button3D>
                </div>
             </DialogContent>
          </Dialog>
