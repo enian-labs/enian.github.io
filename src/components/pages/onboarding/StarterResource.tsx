@@ -2,17 +2,21 @@ import { Button3D } from '@/components/ui/button-3d';
 import NumberTicker from '@/components/ui/number-ticker';
 import { ONBOARDING_RESOURCES } from '@/constant/core';
 import Image from '@/lib/Image';
+import { useMockStore } from '@/stores/mock.store';
 import { StarterResourceProps } from '@/types/onboarding';
 
 export default function StarterResource(props: StarterResourceProps) {
+   const { setProfile, profile } = useMockStore();
+
    return (
       <div className="flex w-full flex-col items-center px-5 pb-9">
          <div className="age-result-card mb-3">
             <span className="age-result-title">Your Telegram Age</span>
             <h4 className="text-shadow-age-result text-xl tracking-[0.4px]">
-               <span className="age-big">4</span>
-               Years <span className="age-big">8</span>Month{' '}
-               <span className="age-big">10</span>Day
+               <NumberTicker value={4} className="age-big text-white" />
+               Years <NumberTicker value={8} className="age-big text-white" />
+               Month <NumberTicker value={10} className="age-big text-white" />
+               Day
             </h4>
          </div>
          <div className="age-result-card">
@@ -44,7 +48,29 @@ export default function StarterResource(props: StarterResourceProps) {
                ))}
             </div>
          </div>
-         <Button3D btnClassName="mt-6" onClick={props.onClick}>
+         <Button3D
+            btnClassName="mt-6"
+            onClick={() => {
+               const check = profile?.metadata.gold?.find(
+                  (q) => q.id === 'starter-resource'
+               );
+               if (!check) {
+                  setProfile({
+                     todo: 'onboarding',
+                     metadata: {
+                        gold: [
+                           {
+                              id: 'starter-resource',
+                              value: 12000,
+                              status: 'claimed',
+                           },
+                        ],
+                     },
+                  });
+               }
+               props.onClick?.();
+            }}
+         >
             Continue
          </Button3D>
       </div>

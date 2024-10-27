@@ -19,8 +19,10 @@ export type QuestCardProps = {
    btnClassName?: string;
    questType?: 'start' | 'verify' | 'claim' | 'claimed';
    metadata: {
+      id?: string;
       title: string;
       reward: string;
       type: 'telegram' | 'x' | 'url' | 'other';
+      url?: string;
    };
 };

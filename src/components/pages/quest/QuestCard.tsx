@@ -1,5 +1,5 @@
 import Image from '@/lib/Image';
-import { cn } from '@/lib/utils';
+import { cn, formatPrice, formatPriceWithoutSymbol } from '@/lib/utils';
 import QuestCardButton from './QuestCard.Button';
 import { CaretDoubleRight, CheckFat } from '@phosphor-icons/react';
 import { Button3D } from '@/components/ui/button-3d';
@@ -52,7 +52,7 @@ export default function QuestCard({
                         height={24}
                         className="mr-1.5"
                      />
-                     +{metadata.reward} Gold
+                     +{formatPriceWithoutSymbol(Number(metadata.reward))} Gold
                   </div>
                </div>
             </div>

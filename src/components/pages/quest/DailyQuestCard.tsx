@@ -1,5 +1,5 @@
 import Image from '@/lib/Image';
-import { cn } from '@/lib/utils';
+import { cn, formatPrice, formatPriceWithoutSymbol } from '@/lib/utils';
 import { DailyQuestCardProps } from '@/types/quest';
 import { CheckFat } from '@phosphor-icons/react';
 
@@ -24,7 +24,9 @@ export default function DailyQuestCard({ metadata }: DailyQuestCardProps) {
                <CheckFat size={22} weight="fill" className="text-[#3FE7FC]" />
             </div>
          )}
-         <h4 className="daily-quest-text">{metadata?.value}</h4>
+         <h4 className="daily-quest-text">
+            {formatPriceWithoutSymbol(Number(metadata?.value))}
+         </h4>
       </div>
    );
 }

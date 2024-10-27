@@ -1,14 +1,15 @@
 import { NAVIGATION_LINKS } from '@/constant/core';
 import Image from '@/lib/Image';
 import { cn } from '@/lib/utils';
+import { useMockStore } from '@/stores/mock.store';
 import { Link } from '@tanstack/react-router';
-import React from 'react';
 
 type NavigationProps = {
    className?: string;
 };
 
 export default function Navigation({ className }: NavigationProps) {
+   const { profile } = useMockStore();
    return (
       <footer
          className={cn(
@@ -28,6 +29,9 @@ export default function Navigation({ className }: NavigationProps) {
                   className={cn({
                      'mx-3': nav.href === '/',
                   })}
+                  search={{
+                     todo: profile?.todo || null,
+                  }}
                >
                   <span className="sr-only">{nav.name}</span>
                   {nav.href === '/' ? (

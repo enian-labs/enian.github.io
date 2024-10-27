@@ -172,7 +172,7 @@ function Dashboard() {
 
          {/* OPEN FARMING MODAL */}
          <Dialog open={openFarming} onOpenChange={setOpenFarming}>
-            <DialogContent>
+            <DialogContent className="p-3">
                <VisuallyHidden.Root>
                   <DialogHeader>
                      <DialogTitle>Edit profile</DialogTitle>

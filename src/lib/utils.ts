@@ -28,3 +28,25 @@ export const letterFormatMoney = (num: number, digits = 1) => {
 };
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+export function formatPrice(
+   value: number,
+   locale: string = 'en-US',
+   currency: string = 'USD'
+): string {
+   return new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: 0,
+   }).format(value);
+}
+
+export function formatPriceWithoutSymbol(
+   value: number,
+   locale: string = 'id-ID'
+): string {
+   return new Intl.NumberFormat(locale, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+   }).format(value);
+}

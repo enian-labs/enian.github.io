@@ -42,7 +42,7 @@ function Quest() {
                   <QuestCard
                      metadata={{
                         title: 'Daily Reward',
-                        reward: '5.000',
+                        reward: '5000',
                         type: 'other',
                      }}
                      onClick={() => setOpenDaily(true)}
@@ -51,7 +51,7 @@ function Quest() {
                   <QuestCard
                      metadata={{
                         title: 'Watch Ads',
-                        reward: '10.000',
+                        reward: '10000',
                         type: 'other',
                      }}
                   />
@@ -65,7 +65,7 @@ function Quest() {
                         key={key}
                         metadata={{
                            title: `Quest List ${key + 1}`,
-                           reward: '10.000',
+                           reward: '10000',
                            type: 'other',
                         }}
                      />
@@ -98,7 +98,7 @@ function Quest() {
                                     day === daily.count
                                        ? daily.status
                                        : 'start',
-                                 value: '5.000',
+                                 value: '5000',
                               }}
                            />
                         </div>
