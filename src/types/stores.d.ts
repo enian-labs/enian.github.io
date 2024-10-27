@@ -22,9 +22,10 @@ export type SkillTypes = {
    name: string;
    level: number;
    claimedResource: string | number;
+   nextClaimedResource: string | number;
    upgradeCost: number;
-   expNeededToNextLevel: number;
    exp: number;
+   expNeededToNextLevel: number;
    desc: string;
    imageUrl: string;
    resource: 'wood' | 'iron' | 'leather';
