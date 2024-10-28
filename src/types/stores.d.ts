@@ -29,4 +29,5 @@ export type SkillTypes = {
    desc: string;
    imageUrl: string;
    resource: 'wood' | 'iron' | 'leather';
+   minExpAllowedFastUpgrade: number;
 };

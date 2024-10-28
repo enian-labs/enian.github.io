@@ -31,6 +31,7 @@ export const DEFAULT_SKILL: SkillTypes[] = [
       desc: 'Unlocking the ability to mine wood while chopping trees. Upgrade your tools to increase resource efficiency and speed.',
       imageUrl: '/assets/original/resource/wood.svg',
       resource: 'wood',
+      minExpAllowedFastUpgrade: 0,
    },
    {
       id: 'miner',
@@ -44,6 +45,7 @@ export const DEFAULT_SKILL: SkillTypes[] = [
       desc: 'Unlock the ability to mine iron ore as you delve into rich veins. Upgrade your tools to increase extraction efficiency and speed.',
       imageUrl: '/assets/original/resource/iron.svg',
       resource: 'iron',
+      minExpAllowedFastUpgrade: 0,
    },
    {
       id: 'skinner',
@@ -57,5 +59,6 @@ export const DEFAULT_SKILL: SkillTypes[] = [
       desc: 'Unlock the ability to skin animals for valuable leather as you hone your skills. Upgrade your tools to increase resource yield and skinning speed.',
       imageUrl: '/assets/original/resource/leather.svg',
       resource: 'leather',
+      minExpAllowedFastUpgrade: 0,
    },
 ];

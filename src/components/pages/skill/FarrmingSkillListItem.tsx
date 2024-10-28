@@ -104,7 +104,9 @@ export default function FarmingSkillListItem({
                      percentage={data.level === 1 ? '100' : undefined}
                      onClick={() => {}}
                   >
-                     <span className={cn('relative z-[5]')}>Fast Upgrade</span>
+                     <span className={cn('relative z-[5] capitalize')}>
+                        Fast Upgrade
+                     </span>
                   </Button3D>
                </div>
             </DialogContent>
