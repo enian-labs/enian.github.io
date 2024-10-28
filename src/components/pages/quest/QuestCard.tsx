@@ -26,7 +26,7 @@ export default function QuestCard({
                   <QuestCardIcon type={metadata.type} />
                </div>
                <div className="flex flex-col text-white">
-                  <h3 className="text-shadow-age-title text-lg font-bold">
+                  <h3 className="text-shadow-age-title text-left text-lg font-bold">
                      {metadata.title}
                   </h3>
                   <div className="flex items-center text-sm font-bold">
