@@ -15,7 +15,7 @@ export default function DailyQuestCard({ metadata }: DailyQuestCardProps) {
          {metadata?.status === 'start' ? (
             <Image
                alt="gold"
-               src="/enian.github.io/resource/gold.svg"
+               src="/enian.github.io/assets/original/resource/gold.svg"
                width={40}
                height={40}
             />
