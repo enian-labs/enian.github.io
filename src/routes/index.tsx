@@ -26,9 +26,8 @@ import ResourceList from '@/components/pages/gameplay/ResourceList';
 import { useMockStore } from '@/stores/mock.store';
 import { DateTime } from 'luxon';
 import { ResourceNameTypes } from '@/types/stores';
-import { DEFAULT_RESOURCE } from '@/constant/store.const';
-import { EXP_CLAIMED_AFTER_FARMING } from '@/lib/formula';
 import { handleProcessFarming } from '@/lib/processFarming';
+import { toast } from 'sonner';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -272,7 +271,10 @@ function Dashboard() {
                <div className="mt-6 space-y-3">
                   <Button3D
                      onClick={() => {
-                        if (!resource) return;
+                        if (!resource) {
+                           toast.error('Please select a resource');
+                           return;
+                        }
                         handleProcess();
                         setOpenFarming(false);
                      }}

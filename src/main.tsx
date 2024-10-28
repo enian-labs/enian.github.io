@@ -23,6 +23,7 @@ declare module '@tanstack/react-router' {
 // load TELEGRAM MINI APP
 WebApp.ready();
 WebApp.expand();
+WebApp.isClosingConfirmationEnabled;
 
 const rootElement = document.getElementById('app')!;
 

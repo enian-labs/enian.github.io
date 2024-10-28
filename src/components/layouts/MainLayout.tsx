@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import { cn } from '@/lib/utils';
 import ProfilBadge from '../pages/gameplay/ProfilBadge';
+import { Toaster } from 'sonner';
 
 export default function MainLayout({
    children,
@@ -32,6 +33,7 @@ export default function MainLayout({
                <Navigation className={navClassName} />
             </section>
          </main>
+         <Toaster position="top-center" richColors visibleToasts={1} />
       </div>
    );
 }

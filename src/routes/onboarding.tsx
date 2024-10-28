@@ -5,6 +5,7 @@ import Image from '@/lib/Image';
 import { sleep } from '@/lib/utils';
 import { createFileRoute } from '@tanstack/react-router';
 import React from 'react';
+import { Toaster } from 'sonner';
 
 export const Route = createFileRoute('/onboarding')({
    component: Onboarding,
@@ -52,6 +53,7 @@ function Onboarding() {
                </div>
             </section>
          </main>
+         <Toaster position="top-center" richColors visibleToasts={1} />
       </div>
    );
 }

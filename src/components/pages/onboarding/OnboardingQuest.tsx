@@ -4,6 +4,7 @@ import { Button3D } from '@/components/ui/button-3d';
 import { useMockStore } from '@/stores/mock.store';
 import { QuestCardProps } from '@/types/quest';
 import { useNavigate } from '@tanstack/react-router';
+import { toast } from 'sonner';
 
 const ONBOARDING_QUEST: QuestCardProps['metadata'][] = [
    {
@@ -57,6 +58,18 @@ export default function OnboardingQuest() {
          <Button3D
             btnClassName="mt-6"
             onClick={() => {
+               const checkMission = profile?.metadata.gold.filter(
+                  (q) =>
+                     ['join-enian-community', 'follow-enian-x'].includes(
+                        q.id
+                     ) && q.status === 'claimed'
+               );
+
+               if (checkMission && checkMission.length < 2) {
+                  toast.error('Please complete the quests first');
+                  return;
+               }
+
                setProfile({
                   ...profile!,
                   todo: 'play',

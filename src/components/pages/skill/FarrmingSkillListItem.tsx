@@ -12,6 +12,11 @@ import { FarmingSkillDataItem } from '@/types/skill';
 import { useState } from 'react';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { SkillTypes } from '@/types/stores';
+import { toast } from 'sonner';
+import { useMockStore } from '@/stores/mock.store';
+import { calculateNextValue, getMinExpAllowedFastUpgrade } from '@/lib/formula';
+import { handleFastUpgrade } from '@/lib/processFarming';
+import { DateTime } from 'luxon';
 
 interface FarmingSkillListItemProps {
    data: SkillTypes;
@@ -20,6 +25,7 @@ interface FarmingSkillListItemProps {
 export default function FarmingSkillListItem({
    data,
 }: FarmingSkillListItemProps) {
+   const { skill, setSkill, profile, setProfile } = useMockStore();
    const [openUpgradeModal, setOpenUpgradeModal] = useState(false);
 
    return (
@@ -94,7 +100,7 @@ export default function FarmingSkillListItem({
                      </div>
                   </div>
                </div>
-               <div className="mt-6 space-y-3">
+               <div className="mt-6">
                   <Button3D
                      btnClassName={cn({
                         'bg-pushable-process-gradient relative':
@@ -102,12 +108,38 @@ export default function FarmingSkillListItem({
                      })}
                      disabled={data.level === 1}
                      percentage={data.level === 1 ? '100' : undefined}
-                     onClick={() => {}}
+                     onClick={() => {
+                        if (data.exp < data.minExpAllowedFastUpgrade) {
+                           toast.error('Not enough EXP to Fast Upgrade');
+                           return;
+                        }
+
+                        // add transaction in gold
+                        setProfile({
+                           ...profile!,
+                           metadata: {
+                              gold: [
+                                 ...profile?.metadata.gold!,
+                                 {
+                                    id: `fast-upgrade-${DateTime.now().toMillis()}`,
+                                    value: -data.upgradeCost,
+                                    status: 'claimed',
+                                 },
+                              ],
+                           },
+                        });
+
+                        handleFastUpgrade(skill, setSkill, data);
+                     }}
                   >
                      <span className={cn('relative z-[5] capitalize')}>
                         Fast Upgrade
                      </span>
                   </Button3D>
+                  <p className="text-center text-xs font-medium text-[#FFB961]">
+                     *Min. Exp Allowed to Fast Upgrade :{' '}
+                     {data.minExpAllowedFastUpgrade} Exp
+                  </p>
                </div>
             </DialogContent>
          </Dialog>

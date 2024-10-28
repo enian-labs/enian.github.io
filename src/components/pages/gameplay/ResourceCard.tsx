@@ -28,7 +28,7 @@ export default function ResourceCard({
                textClassName
             )}
          >
-            {letterFormatMoney(total, 3)}
+            {letterFormatMoney(total, 2)}
          </div>
       </div>
    );
