@@ -1,4 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout';
+import BattleSkillComingSoon from '@/components/pages/skill/BattleSkillComingSoon';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/inventory')({
@@ -10,9 +11,12 @@ function Inventory() {
       <MainLayout
          wrapperClassName="p-5 ty:gap-6 h-screen"
          navClassName="ty:pb-0"
+         bgUrl="/assets/background/forest.png"
       >
-         <div className="flex flex-1 flex-col">
-            <h3 className="text-indigo-500">Inventory | Enian Combat!</h3>
+         <div className="flex h-full flex-col gap-6">
+            <div className="h-full w-full">
+               <BattleSkillComingSoon className="flex" />
+            </div>
          </div>
       </MainLayout>
    );
