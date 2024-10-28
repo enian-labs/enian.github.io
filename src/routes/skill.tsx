@@ -2,8 +2,8 @@ import MainLayout from '@/components/layouts/MainLayout';
 import BattleSkillComingSoon from '@/components/pages/skill/BattleSkillComingSoon';
 import FarmingSkillList from '@/components/pages/skill/FarmingSkillList';
 import Menu from '@/components/ui/menu';
-import { DEFAULT_SKILL } from '@/constant/store.const';
 import { cn } from '@/lib/utils';
+import { useMockStore } from '@/stores/mock.store';
 import { FarmingSkillDataItem } from '@/types/skill';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
@@ -42,6 +42,7 @@ const farmingSkills: FarmingSkillDataItem[] = [
 ];
 
 function Skill() {
+   const { skill } = useMockStore();
    const [selectedTab, setSelectedTab] = useState(tabsMenu[0].key);
 
    return (
@@ -62,7 +63,7 @@ function Skill() {
                   className={cn(
                      selectedTab === tabsMenu[0].key ? 'flex' : 'hidden'
                   )}
-                  data={DEFAULT_SKILL}
+                  data={skill}
                   key="farming-skill-list"
                />
                <BattleSkillComingSoon

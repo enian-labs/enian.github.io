@@ -26,6 +26,9 @@ import ResourceList from '@/components/pages/gameplay/ResourceList';
 import { useMockStore } from '@/stores/mock.store';
 import { DateTime } from 'luxon';
 import { ResourceNameTypes } from '@/types/stores';
+import { DEFAULT_RESOURCE } from '@/constant/store.const';
+import { EXP_CLAIMED_AFTER_FARMING } from '@/lib/formula';
+import { handleProcessFarming } from '@/lib/processFarming';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -50,7 +53,14 @@ function Dashboard() {
    const [processPercentage, setProcessPercentage] = React.useState(0);
    const [openFarming, setOpenFarming] = React.useState(false);
    const [resource, setResource] = React.useState('');
-   const { farming, setFarming } = useMockStore();
+   const {
+      farming,
+      setFarming,
+      resource: localResource,
+      setResource: setLocalResource,
+      skill,
+      setSkill,
+   } = useMockStore();
 
    // set coutndown
    const [cd, setCd] = React.useState({
@@ -84,6 +94,7 @@ function Dashboard() {
             break;
 
          case 'END':
+            // break the bubble
             bubbles.forEach((bubble) => {
                party.sparkles(bubble, {
                   count: party.variation.range(1, 30), // Customize the amount of confetti
@@ -93,6 +104,16 @@ function Dashboard() {
                // Remove the bubble after the confetti
                bubble.style.opacity = '0'; // Fade out animation
             });
+
+            // handle exp + get resource after claim
+            handleProcessFarming(
+               farming,
+               skill,
+               setSkill,
+               localResource,
+               setLocalResource
+            );
+
             await sleep(500);
             setProcess('START');
             setTextRender('Start Farming');
@@ -105,7 +126,7 @@ function Dashboard() {
             break;
 
          default:
-            const endTime = DateTime.now().plus({ minutes: 2 }).toMillis();
+            const endTime = DateTime.now().plus({ minutes: 1 }).toMillis();
             const duration = addCountdownConfig(endTime);
             setCd(duration);
             setFarming({
@@ -129,9 +150,11 @@ function Dashboard() {
             setProcess('PROCESS');
             setTextRender('Countdown');
             addCountdownConfig(farming.endTime, setCd);
+            setResource(farming.resource);
          } else if (farming.process === 'end') {
             setProcess('END');
             setTextRender('Claim Resource');
+            setResource(farming.resource);
          }
       }
    }, []);

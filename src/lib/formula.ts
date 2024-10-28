@@ -1,3 +1,5 @@
+export const EXP_CLAIMED_AFTER_FARMING = 150;
+
 const EXP_MULTIPLIER = 3 / 100; // 3%
 
 const EXP_FAST_UPGRADE_PERCENTAGE = 20 / 100; // 20%
