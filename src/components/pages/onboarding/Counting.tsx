@@ -21,7 +21,7 @@ export default function Counting({ loadingWidth, onEnd }: CountingProps) {
             ></div>
          </div>
          <p className="text-lg font-bold text-white">
-            Counting Telegram Age (
+            Loading (
             <AnimatedCounter
                start={0}
                end={loadingWidth}
