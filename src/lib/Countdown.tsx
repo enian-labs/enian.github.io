@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { addCountdownTotalTime } from './utils';
 
 interface CountdownProps {
    hours: number;
@@ -6,6 +7,7 @@ interface CountdownProps {
    seconds: number;
    onCountdownFinished?: () => void;
    onPercentage?: (percentage: number | string) => void;
+   totalCountdownTime?: number;
 }
 
 const Countdown: React.FC<CountdownProps> = ({
@@ -14,12 +16,16 @@ const Countdown: React.FC<CountdownProps> = ({
    seconds,
    onCountdownFinished,
    onPercentage,
+   totalCountdownTime,
 }) => {
    // Total time in seconds when the countdown starts
-   const totalTime = hours * 3600 + minutes * 60 + seconds;
+   const totalTime =
+      totalCountdownTime || addCountdownTotalTime({ hours, minutes, seconds });
 
    // State to track the remaining time
-   const [time, setTime] = useState<number>(totalTime);
+   const [time, setTime] = useState<number>(
+      addCountdownTotalTime({ hours, minutes, seconds })
+   );
 
    useEffect(() => {
       getPercentage();

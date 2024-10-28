@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { createFileRoute, redirect, useSearch } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 import Image from '@/lib/Image';
-import { FARMING_LIST, RESOURCE_LIST } from '@/constant/core';
-import ResourceCard from '@/components/pages/gameplay/ResourceCard';
-import ProfilBadge from '@/components/pages/gameplay/ProfilBadge';
+import { FARMING_LIST } from '@/constant/core';
 import { Button3D } from '@/components/ui/button-3d';
 import Countdown from '@/lib/Countdown';
-import { cn, sleep } from '@/lib/utils';
+import {
+   addCountdownConfig,
+   addCountdownTotalTime,
+   cn,
+   sleep,
+} from '@/lib/utils';
 import party from 'party-js';
 import MainLayout from '@/components/layouts/MainLayout';
 import {
@@ -20,6 +23,9 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import SelectFarming from '@/components/pages/gameplay/SelectFarming';
 import FarmingBubble from '@/components/pages/gameplay/FarmingBubble';
 import ResourceList from '@/components/pages/gameplay/ResourceList';
+import { useMockStore } from '@/stores/mock.store';
+import { DateTime } from 'luxon';
+import { ResourceNameTypes } from '@/types/stores';
 
 export const Route = createFileRoute('/')({
    component: Dashboard,
@@ -43,10 +49,19 @@ function Dashboard() {
    const [textRender, setTextRender] = React.useState('Start Farming');
    const [processPercentage, setProcessPercentage] = React.useState(0);
    const [openFarming, setOpenFarming] = React.useState(false);
-   const [farming, setFarming] = React.useState('');
+   const [resource, setResource] = React.useState('');
+   const { farming, setFarming } = useMockStore();
+
+   // set coutndown
+   const [cd, setCd] = React.useState({
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+   });
 
    const textBtn = textRender;
    const prcntg = processPercentage;
+   const countdown = cd;
 
    const handleProcess = async () => {
       const bubbles: NodeListOf<HTMLElement> =
@@ -61,6 +76,11 @@ function Dashboard() {
             await sleep(500);
             setProcess('END');
             setTextRender('Claim Resource');
+            setFarming({
+               ...farming!,
+               process: 'end',
+            });
+
             break;
 
          case 'END':
@@ -76,15 +96,45 @@ function Dashboard() {
             await sleep(500);
             setProcess('START');
             setTextRender('Start Farming');
-            setFarming('');
+            setResource('');
+            setFarming({
+               ...farming!,
+               process: 'idle',
+            });
+
             break;
 
          default:
+            const endTime = DateTime.now().plus({ minutes: 2 }).toMillis();
+            const duration = addCountdownConfig(endTime);
+            setCd(duration);
+            setFarming({
+               ...farming!,
+               endTime,
+               process: 'running',
+               resource: resource as ResourceNameTypes,
+               totalTime: addCountdownTotalTime(duration),
+            });
+
             setProcess('PROCESS');
             setTextRender('Countdown');
+
             break;
       }
    };
+
+   React.useEffect(() => {
+      if (farming) {
+         if (farming.process === 'running') {
+            setProcess('PROCESS');
+            setTextRender('Countdown');
+            addCountdownConfig(farming.endTime, setCd);
+         } else if (farming.process === 'end') {
+            setProcess('END');
+            setTextRender('Claim Resource');
+         }
+      }
+   }, []);
 
    return (
       <>
@@ -107,13 +157,13 @@ function Dashboard() {
                   <>
                      {/* RESOURCE RESULT AFTER FARMING */}
                      <FarmingBubble
-                        type={farming}
+                        type={resource}
                         className={cn('bottom-[35%] left-[10%]', {
                            'opacity-100': process === 'END',
                         })}
                      />
                      <FarmingBubble
-                        type={farming}
+                        type={resource}
                         className={cn(
                            'bottom-[20%] right-[23%] [animation-delay:2s]',
                            {
@@ -122,7 +172,7 @@ function Dashboard() {
                         )}
                      />
                      <FarmingBubble
-                        type={farming}
+                        type={resource}
                         className={cn(
                            'bottom-[48%] right-[3%] [animation-delay:1s]',
                            {
@@ -150,9 +200,10 @@ function Dashboard() {
                >
                   {process === 'PROCESS' ? (
                      <Countdown
-                        hours={0}
-                        minutes={0}
-                        seconds={10}
+                        hours={countdown.hours}
+                        minutes={countdown.minutes}
+                        seconds={countdown.seconds}
+                        totalCountdownTime={farming?.totalTime}
                         onCountdownFinished={() => handleProcess()}
                         onPercentage={(percentage) => {
                            setProcessPercentage(Number(percentage));
@@ -182,23 +233,23 @@ function Dashboard() {
                   </DialogHeader>
                </VisuallyHidden.Root>
                <div className="flex flex-col gap-3">
-                  {FARMING_LIST.map((farm, key) => (
+                  {FARMING_LIST.map((rsc, key) => (
                      <SelectFarming
                         key={key}
-                        id={farm.name}
-                        value={farm.name}
+                        id={rsc.name}
+                        value={rsc.name}
                         onChange={(value) => {
-                           setFarming(value);
+                           setResource(value);
                         }}
-                        metadata={farm}
-                        checked={farm.name === farming}
+                        metadata={rsc}
+                        checked={rsc.name === resource}
                      />
                   ))}
                </div>
                <div className="mt-6 space-y-3">
                   <Button3D
                      onClick={() => {
-                        if (!farming) return;
+                        if (!resource) return;
                         handleProcess();
                         setOpenFarming(false);
                      }}

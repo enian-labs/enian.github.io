@@ -17,6 +17,8 @@ export type ResourceTypes = {
    total: number | string;
 };
 
+export type ResourceNameTypes = 'wood' | 'iron' | 'leather';
+
 export type SkillTypes = {
    id: string;
    name: string;
@@ -28,6 +30,13 @@ export type SkillTypes = {
    expNeededToNextLevel: number;
    desc: string;
    imageUrl: string;
-   resource: 'wood' | 'iron' | 'leather';
+   resource: ResourceNameTypes;
    minExpAllowedFastUpgrade: number;
+};
+
+export type FarmingTypes = {
+   process: 'idle' | 'running' | 'end';
+   endTime: number;
+   totalTime: number;
+   resource: ResourceNameTypes;
 };

@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from 'clsx';
+import { DateTime } from 'luxon';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -50,3 +51,40 @@ export function formatPriceWithoutSymbol(
       maximumFractionDigits: 2,
    }).format(value);
 }
+
+export const addCountdownConfig = (
+   endTimeMillis: number,
+   updateFunc?: React.Dispatch<
+      React.SetStateAction<{ hours: number; minutes: number; seconds: number }>
+   >
+) => {
+   const now = DateTime.now();
+   const endTime = DateTime.fromMillis(endTimeMillis);
+   const { hours, minutes, seconds } = endTime
+      .diff(now, ['hours', 'minutes', 'seconds'])
+      .toObject();
+
+   const countdown = {
+      hours: Math.round(hours || 0),
+      minutes: Math.round(minutes || 0),
+      seconds: Math.round(seconds || 0),
+   };
+
+   if (updateFunc) {
+      updateFunc(countdown);
+   }
+
+   return countdown;
+};
+
+export const addCountdownTotalTime = ({
+   hours,
+   minutes,
+   seconds,
+}: {
+   hours: number;
+   minutes: number;
+   seconds: number;
+}) => {
+   return hours * 3600 + minutes * 60 + seconds;
+};

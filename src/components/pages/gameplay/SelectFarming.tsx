@@ -40,7 +40,7 @@ export default function SelectFarming({
                      {metadata.name}
                   </h4>
                   <p className="text-shadow-age-result text-xs/normal font-medium tracking-[0.24px] text-[#FFB961]">
-                     8h Waiting Time
+                     1m Waiting Time
                   </p>
                </div>
             </div>

@@ -1,5 +1,10 @@
 import { DEFAULT_RESOURCE, DEFAULT_SKILL } from '@/constant/store.const';
-import { ProfileTypes, ResourceTypes, SkillTypes } from '@/types/stores';
+import {
+   FarmingTypes,
+   ProfileTypes,
+   ResourceTypes,
+   SkillTypes,
+} from '@/types/stores';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -10,6 +15,8 @@ interface MockState {
    setResource: (resource: ResourceTypes[]) => void;
    skill: SkillTypes[];
    setSkill: (skill: SkillTypes[]) => void;
+   farming: FarmingTypes | null;
+   setFarming: (farming: FarmingTypes | null) => void;
 }
 
 // Persistent Zustand store for user data
@@ -22,6 +29,8 @@ export const useMockStore = create<MockState>()(
          setResource: (resource) => set({ resource }),
          skill: DEFAULT_SKILL,
          setSkill: (skill) => set({ skill }),
+         farming: null,
+         setFarming: (farming) => set({ farming }),
       }),
       { name: 'enain-combat-mock' }
    )
