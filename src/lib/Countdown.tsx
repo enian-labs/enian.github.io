@@ -42,11 +42,15 @@ const Countdown: React.FC<CountdownProps> = ({
    }, [time]);
 
    const formatTime = (timeInSeconds: number) => {
-      const h = Math.floor(timeInSeconds / 3600);
-      const m = Math.floor((timeInSeconds % 3600) / 60);
-      const s = timeInSeconds % 60;
+      const hours = Math.floor(timeInSeconds / 3600);
+      const minutes = Math.floor((timeInSeconds % 3600) / 60);
+      const seconds = timeInSeconds % 60;
 
-      return `${h}h ${m}m ${s}s`;
+      const formattedHours = hours > 0 ? `${hours}h ` : '0h ';
+      const formattedMinutes = minutes > 0 ? `${minutes}m ` : '0m ';
+      const formattedSeconds = seconds > 0 ? `${seconds}s` : '0s';
+
+      return `${formattedHours}${formattedMinutes}${formattedSeconds}`;
    };
 
    // Calculate the percentage of time passed
