@@ -1,24 +1,23 @@
 import Image from '@/lib/Image';
-import { QuestCardIconProps, QuestCardProps } from '@/types/quest';
-import React, { useEffect } from 'react';
+import { QuestCardIconProps } from '@/types/quest';
 
 export default function QuestCardIcon(props: QuestCardIconProps) {
    const getIcon = (type: typeof props.type) => {
       switch (type) {
          case 'ads':
-            return '/assets/quest/icon-ads.svg';
+            return '/enian.github.io/assets/quest/icon-ads.svg';
 
          case 'daily':
-            return '/assets/quest/icon-daily.svg';
+            return '/enian.github.io/assets/quest/icon-daily.svg';
 
          case 'telegram':
-            return '/assets/quest/icon-telegram.svg';
+            return '/enian.github.io/assets/quest/icon-telegram.svg';
 
          case 'x':
-            return '/assets/quest/icon-x.svg';
+            return '/enian.github.io/assets/quest/icon-x.svg';
 
          default:
-            return '/assets/quest/icon-quest.svg';
+            return '/enian.github.io/assets/quest/icon-quest.svg';
       }
    };
 

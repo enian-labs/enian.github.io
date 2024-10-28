@@ -69,7 +69,7 @@ const DialogContent = React.forwardRef<
                <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2">
                   <Image
                      alt="daily"
-                     src="/assets/quest/icon-other.svg"
+                     src="/enian.github.io/assets/quest/icon-other.svg"
                      width={120}
                      height={120}
                   />

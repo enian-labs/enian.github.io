@@ -8,7 +8,7 @@ export default function MainLayout({
    children,
    wrapperClassName,
    navClassName,
-   bgUrl = '/assets/background/bg-main.png',
+   bgUrl = '/enian.github.io/assets/background/bg-main.png',
 }: {
    children: React.ReactNode;
    wrapperClassName?: string;

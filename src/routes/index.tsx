@@ -167,7 +167,7 @@ function Dashboard() {
             <div className="flex flex-1 flex-col items-center justify-end">
                <div className="relative mb-4 w-full ty:mb-[1.375rem]">
                   <Image
-                     src="/assets/original/knight.png"
+                     src="/enian.github.io/assets/original/knight.png"
                      alt="knight"
                      width={328}
                      height={323}
@@ -242,7 +242,7 @@ function Dashboard() {
          <Dialog open={openFarming} onOpenChange={setOpenFarming}>
             <DialogContent
                className="p-3"
-               iconImageUrl="/assets/pickaxe.svg"
+               iconImageUrl="/enian.github.io/assets/pickaxe.svg"
                iconClassName="size-[52px]"
             >
                <VisuallyHidden.Root>

@@ -49,7 +49,7 @@ function Skill() {
       <MainLayout
          wrapperClassName="p-5 ty:gap-6 h-screen"
          navClassName="ty:pb-0"
-         bgUrl="/assets/background/forest.png"
+         bgUrl="/enian.github.io/assets/background/forest.png"
       >
          <div className="flex h-full flex-col gap-6">
             <Menu

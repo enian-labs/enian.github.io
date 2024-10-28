@@ -7,7 +7,7 @@ export default function Counting({ loadingWidth, onEnd }: CountingProps) {
       <div className="flex flex-col items-center px-5 pb-9">
          <div className="relative mb-3 w-full">
             <Image
-               src="/assets/wood-container.svg"
+               src="/enian.github.io/assets/wood-container.svg"
                alt="loader"
                width={275}
                height={21}

@@ -32,7 +32,7 @@ export default function QuestCard({
                   <div className="flex items-center text-sm font-bold">
                      <Image
                         alt="gold"
-                        src="/assets/original/resource/raw-gold.svg"
+                        src="/enian.github.io/assets/original/resource/raw-gold.svg"
                         width={24}
                         height={24}
                         className="mr-1.5"
