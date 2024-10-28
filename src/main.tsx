@@ -9,6 +9,7 @@ import './styles/index.css';
 
 // Set up a Router instance
 const router = createRouter({
+   basepath: '/enian.github.io',
    routeTree,
    defaultPreload: 'intent',
 });

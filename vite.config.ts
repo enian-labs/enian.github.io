@@ -2,15 +2,10 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
-import basicSsl from '@vitejs/plugin-basic-ssl';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-   plugins: [
-      TanStackRouterVite({}),
-      react(),
-      // basicSsl()
-   ],
+   plugins: [TanStackRouterVite({}), react()],
    resolve: {
       alias: {
          '@': path.resolve(__dirname, './src'),
@@ -20,5 +15,5 @@ export default defineConfig({
    build: {
       outDir: './docs',
    },
-   base: './',
+   base: '/enian.github.io/',
 });
