@@ -26,10 +26,10 @@ export default function QuestCard({
                   <QuestCardIcon type={metadata.type} />
                </div>
                <div className="flex flex-col text-white">
-                  <h3 className="text-shadow-age-title text-left text-lg font-bold">
+                  <h3 className="text-shadow-age-title text-left text-sm font-bold">
                      {metadata.title}
                   </h3>
-                  <div className="flex items-center text-sm font-bold">
+                  <div className="flex items-center text-xs font-bold">
                      <Image
                         alt="gold"
                         src="/enian.github.io/assets/original/resource/raw-gold.svg"
